@@ -1,3 +1,3 @@
-# sendnutez
+# send NUTEZ
 
 Nutrition tracking done right
