@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -52,10 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
+        if (viewPager.getCurrentItem() == 1) {
             super.onBackPressed();
         } else {
-            viewPager.setCurrentItem(viewPager.getCurrentItem() -1);
+            if (viewPager.getCurrentItem() == 0)
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+            else
+                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
     }
 
