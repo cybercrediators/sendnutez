@@ -1,11 +1,14 @@
 package send.nutez;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.jetbrains.annotations.NonNls;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -107,7 +113,7 @@ public class CameraFragment extends Fragment {
 
                 //bindPreview(cameraProvider);
                 cameraProvider.unbindAll();
-                camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
+                camera = cameraProvider.bindToLifecycle(this, cameraSelector, imageCapture, preview);
                 preview.setSurfaceProvider(previewView.getSurfaceProvider());
             } catch (ExecutionException | InterruptedException e) {
                 Log.e("CAMERA ERROR", "Camera not initialized");
@@ -116,33 +122,59 @@ public class CameraFragment extends Fragment {
         }, ContextCompat.getMainExecutor(asdf));
     }
 
+    private void takePhoto() throws IOException {
+
+        if (imageCapture != null) {
+            String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+            //File photoFile = new File(path, );
+            String fname = new SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis());
+            File folder = new File(path, "asdf");
+            if( !folder.exists() )
+                folder.mkdir();
+
+            long timestamp = System.currentTimeMillis();
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timestamp);
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
+
+            File photoFile = File.createTempFile(fname, ".jpg", folder);
+            ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(
+                    this.asdf.getContentResolver(),
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    contentValues
+            ).build();
+
+            imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(asdf),
+                    new ImageCapture.OnImageSavedCallback() {
+                        @Override
+                        public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
+                            Uri savedURI = Uri.fromFile(photoFile);
+                            String msg = "Photo captured successfully: " + savedURI;
+                            Toast.makeText(asdf, msg, Toast.LENGTH_SHORT).show();
+                            Log.i("IMAGE TAKEn", "IMAGE WAS TAKEN" + msg);
+                        }
+
+                        @Override
+                        public void onError(ImageCaptureException exception) {
+                            Log.e("IMAGE ERROR", "Couldn't take image!");
+                            Uri savedURI = Uri.fromFile(photoFile);
+                            Log.e("PATH", savedURI.toString());
+                            Log.e("ERROR: ", exception.toString());
+                            exception.printStackTrace();
+                        }
+                    });
+        }
+    }
+
     View.OnClickListener takePictureListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (imageCapture != null) {
-                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                //File photoFile = new File(path, new SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis()) + ".png");
-                File photoFile = new File(path, "asdf.png");
-                ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(photoFile).build();
-
-                imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(asdf),
-                        new ImageCapture.OnImageSavedCallback() {
-                            @Override
-                            public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
-                                Uri savedURI = Uri.fromFile(photoFile);
-                                String msg = "Photo captured successfully: " + savedURI;
-                                Toast.makeText(asdf, msg, Toast.LENGTH_SHORT).show();
-                                Log.i("IMAGE TAKEn", "IMAGE WAS TAKEN" + msg);
-                            }
-
-                            @Override
-                            public void onError(ImageCaptureException exception) {
-                                Log.e("IMAGE ERROR", "Couldn't take image!");
-                                Uri savedURI = Uri.fromFile(photoFile);
-                                Log.e("PATH", savedURI.toString());
-                                Log.e("ERROR: ", exception.toString());
-                            }
-                        });
+            try {
+                takePhoto();
+            } catch (IOException e) {
+                Log.e("CRINGE", "YOU FAILED");
+                e.printStackTrace();
             }
         }
     };
