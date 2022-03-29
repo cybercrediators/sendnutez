@@ -1,6 +1,10 @@
 package send.nutez;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,10 @@ import send.nutez.utils.StorageDatabaseUtils;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DEBUG_STRING = "LALALA";
+    private static final int PAGES = 3;
+
+    private ViewPager2 viewPager;
+    private FragmentStateAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +44,42 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.d(DEBUG_STRING, m.getName() + ": " + s.toString());
         }*/
+        viewPager = findViewById(R.id.viewpager);
+        pagerAdapter = new SliderPageAdapter(this);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(1, false);
     }
 
-    private void test() {
-        Meal pizza = new Meal("pizza");
-        Ingredient cheese = new Ingredient("cheese", 500);
-        cheese.setUnit("g");
-
-        Ingredient flour = new Ingredient("flour", 1000);
-        flour.setUnit("g");
-
-        Ingredient oil = new Ingredient("olive oil", 100);
-        oil.setUnit("ml");
-
-        StorageDatabaseUtils.insert(pizza);
-
-        pizza.addIngredient(cheese);
-        pizza.addIngredient(flour);
-        pizza.addIngredient(oil);
-
+    @Override
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        } else {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() -1);
+        }
     }
+
+    private class SliderPageAdapter extends FragmentStateAdapter {
+        public SliderPageAdapter(FragmentActivity fa) {
+            super(fa);
+        }
+
+        @Override
+        public Fragment createFragment(int position) {
+            switch (position) {
+                case 0:
+                    return new CameraFragment();
+                case 2:
+                    return new MenuFragment();
+                default:
+                    return new SlidingFragment();
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return PAGES;
+        }
+    }
+
 }
