@@ -41,7 +41,7 @@ public class StorageDatabaseUtils {
         }
     }
 
-    public List<Meal> getAllMeals() {
+    public static List<Meal> getAllMeals() {
         return daoSession.getMealDao().loadAll();
     }
 

@@ -4,7 +4,9 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
@@ -15,6 +17,8 @@ import send.nutez.utils.StorageDatabaseUtils;
 public class Meal {
     @Id(autoincrement = true)
     private Long id;
+
+    private Date creationDate;
     private String name;
     @ToMany(referencedJoinProperty = "meal_id")
     private List<Ingredient> ingredients;
@@ -28,6 +32,7 @@ public class Meal {
     public Meal(String name) {
         this.name = name;
         this.ingredients = new ArrayList<>();
+        this.creationDate = new Date(System.currentTimeMillis());
     }
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -37,9 +42,10 @@ public class Meal {
     @Generated(hash = 1947976862)
     private transient MealDao myDao;
 
-    @Generated(hash = 1530238292)
-    public Meal(Long id, String name) {
+    @Generated(hash = 979687567)
+    public Meal(Long id, Date creationDate, String name) {
         this.id = id;
+        this.creationDate = creationDate;
         this.name = name;
     }
 
@@ -125,6 +131,14 @@ public class Meal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getCreationDate() {
+        return this.creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     /** called by internal mechanisms, do not call yourself. */

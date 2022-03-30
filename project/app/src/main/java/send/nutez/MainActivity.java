@@ -27,8 +27,15 @@ public class MainActivity extends AppCompatActivity {
         for (Nute n: StorageDatabaseUtils.getAllNutes()) {
             Log.d(DEBUG_STRING, Integer.toString(StorageDatabaseUtils.getNuteReferenceValueByName(n.getName()).size()));
         }
+        /*test();
 
-        test();
+        for(Meal m : StorageDatabaseUtils.getAllMeals()) {
+            StringBuilder s = new StringBuilder();
+            for(Ingredient i : m.getIngredients()) {
+                s.append(i.getName() + " ");
+            }
+            Log.d(DEBUG_STRING, m.getName() + ": " + s.toString());
+        }*/
     }
 
     private void test() {
