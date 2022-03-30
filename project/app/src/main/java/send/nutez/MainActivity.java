@@ -7,39 +7,46 @@ import android.util.Log;
 
 import org.greenrobot.greendao.database.Database;
 
-import send.nutez.model.DaoMaster;
-import send.nutez.model.DaoSession;
+import send.nutez.model.Ingredient;
+import send.nutez.model.Meal;
 import send.nutez.model.Nute;
-import send.nutez.model.NuteDao;
-import send.nutez.model.NuteReferenceValue;
-import send.nutez.model.NuteReferenceValueDao;
+import send.nutez.utils.NuteDatabaseUtils;
+import send.nutez.utils.StorageDatabaseUtils;
 
 public class MainActivity extends AppCompatActivity {
-    private static Database mDatabase;
-    private static DaoSession mDaoSession;
+    public static final String DEBUG_STRING = "LALALA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Nute nute = new Nute("test19", "slutz");
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getApplicationContext(), "TASKS");
-        mDatabase = helper.getWritableDb();
-        mDaoSession = new DaoMaster(mDatabase).newSession();
-        NuteDao nuteDao = mDaoSession.getNuteDao();
-        nuteDao.deleteAll();
-        mDaoSession.getNuteReferenceValueDao().deleteAll();
-        nuteDao.insert(nute);
-        Nute nute1 = nuteDao.queryBuilder().where(NuteDao.Properties.Name.eq("test19")).unique();
-        Log.d("LALALA", nute1.getName());
 
-        NuteReferenceValue val = new NuteReferenceValue();
-        val.setNute(nute1);
-        mDaoSession.getNuteReferenceValueDao().insert(val);
-        NuteReferenceValue nuteReferenceValue = mDaoSession.getNuteReferenceValueDao().queryBuilder().where(NuteReferenceValueDao.Properties.Id.eq(val.getId())).list().get(0);
-        Log.d("LALALA", nuteReferenceValue.getNute().getName());
-        nute1.setName("uufff");
-        nuteReferenceValue = mDaoSession.getNuteReferenceValueDao().queryBuilder().where(NuteReferenceValueDao.Properties.Id.eq(val.getId())).list().get(0);
-        Log.d("LALALA", nuteReferenceValue.getNute().getName());
+        //Important! Don't to shit with data above this line
+        NuteDatabaseUtils.initialize(getApplicationContext());
+
+        for (Nute n: StorageDatabaseUtils.getAllNutes()) {
+            Log.d(DEBUG_STRING, Integer.toString(StorageDatabaseUtils.getNuteReferenceValueByName(n.getName()).size()));
+        }
+
+        test();
+    }
+
+    private void test() {
+        Meal pizza = new Meal("pizza");
+        Ingredient cheese = new Ingredient("cheese", 500);
+        cheese.setUnit("g");
+
+        Ingredient flour = new Ingredient("flour", 1000);
+        flour.setUnit("g");
+
+        Ingredient oil = new Ingredient("olive oil", 100);
+        oil.setUnit("ml");
+
+        StorageDatabaseUtils.insert(pizza);
+
+        pizza.addIngredient(cheese);
+        pizza.addIngredient(flour);
+        pizza.addIngredient(oil);
+
     }
 }

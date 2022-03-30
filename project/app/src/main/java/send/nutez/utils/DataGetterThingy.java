@@ -5,10 +5,10 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import send.nutez.model.Food;
+import send.nutez.model.Ingredient;
+import send.nutez.model.IngredientNuteValue;
 import send.nutez.model.Nute;
-import send.nutez.model.Recipe;
-import send.nutez.model.Staple;
+import send.nutez.model.Meal;
 
 public class DataGetterThingy {
 
@@ -17,19 +17,22 @@ public class DataGetterThingy {
      * @param recipe
      * @return
      */
-    public List<Staple> getRecipe(Recipe recipe) {
+    public List<Ingredient> getRecipe(Meal recipe) {
         return new ArrayList<>();
     }
 
-    public Dictionary<Nute, Float> getNutrientsFor(Staple staple) {
-        return new Hashtable<>();
+    public void fillNutrientsFor(Ingredient ingredient) {
+        StorageDatabaseUtils.insert(ingredient);
+        //TODO get nutrient list for ingredient name
+        List<IngredientNuteValue> values = new ArrayList<>();
+
+        for(IngredientNuteValue v : values) {
+            v.setIngredient_id(ingredient.getId());
+            v.setNute_id(0);
+        }
     }
 
-    public Dictionary<Nute, Float> getNutrientsFor(Food staple) {
-        return new Hashtable<>();
-    }
-
-    public Dictionary<Nute, Float> getNutrientsFor(Recipe staple) {
+    public Dictionary<Nute, Float> getNutrientsFor(Meal meal) {
         return new Hashtable<>();
     }
 }
