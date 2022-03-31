@@ -205,6 +205,10 @@ public class CameraFragment extends Fragment {
         public void analyze(@NonNull ImageProxy image) {
             if (!livePreview.get())
                 return;
+            if (isProcessing.get()) {
+                image.close();
+                return;
+            }
             int rotationDegrees = image.getImageInfo().getRotationDegrees();
             liveDetection(image, rotationDegrees);
             image.close();
@@ -212,10 +216,6 @@ public class CameraFragment extends Fragment {
     }
 
     private void liveDetection(ImageProxy img, final int rotationDegrees) {
-        if (isProcessing.get()) {
-            img.close();
-            return;
-        }
         isProcessing.set(true);
         final Bitmap src = proxyToBitmap(img);
         img.close();
@@ -224,9 +224,9 @@ public class CameraFragment extends Fragment {
             Log.e("NO DET.", "NO detection possible!");
             return;
         }
-//        detectService.execute(new Runnable() {
-//            @Override
-//            public void run() {
+        detectService.execute(new Runnable() {
+            @Override
+            public void run() {
                 Matrix matrix = new Matrix();
                 matrix.postRotate(rotationDegrees);
                 width = src.getWidth();
@@ -237,8 +237,8 @@ public class CameraFragment extends Fragment {
                 if (result != null) {
                     showResultOnUI(result, bmp);
                 }
-//            }
-//        });
+            }
+        });
     }
 
     protected void showResultOnUI(Box[] result, Bitmap bmp) {
