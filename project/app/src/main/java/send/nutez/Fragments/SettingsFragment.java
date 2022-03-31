@@ -19,6 +19,59 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         EditTextPreference threshold = findPreference("threshold");
         EditTextPreference nms_threshold = findPreference("nms_threshold");
+        EditTextPreference age_months = findPreference("age_months");
+        EditTextPreference weight = findPreference("weight");
+        EditTextPreference water_intake = findPreference("water_amount");
+        EditTextPreference age_years = findPreference("age_years");
+
+        if (water_intake != null) {
+            water_intake.setSummaryProvider(new Preference.SummaryProvider<EditTextPreference>() {
+                @Override
+                public CharSequence provideSummary(EditTextPreference preference) {
+                    String text = preference.getText();
+                    if (TextUtils.isEmpty(text)){
+                        return "Not set";
+                    }
+                    return "Current water intake (ml): " + text;
+                }
+            });
+        }
+        if (weight != null) {
+            weight.setSummaryProvider(new Preference.SummaryProvider<EditTextPreference>() {
+                @Override
+                public CharSequence provideSummary(EditTextPreference preference) {
+                    String text = preference.getText();
+                    if (TextUtils.isEmpty(text)){
+                        return "Not set";
+                    }
+                    return "Current weight (kg): " + text;
+                }
+            });
+        }
+        if (age_years != null) {
+            age_years.setSummaryProvider(new Preference.SummaryProvider<EditTextPreference>() {
+                @Override
+                public CharSequence provideSummary(EditTextPreference preference) {
+                    String text = preference.getText();
+                    if (TextUtils.isEmpty(text)){
+                        return "Not set";
+                    }
+                    return "Current age (years): " + text;
+                }
+            });
+        }
+        if (age_months != null) {
+            age_months.setSummaryProvider(new Preference.SummaryProvider<EditTextPreference>() {
+                @Override
+                public CharSequence provideSummary(EditTextPreference preference) {
+                    String text = preference.getText();
+                    if (TextUtils.isEmpty(text)){
+                        return "Not set";
+                    }
+                    return "Current age (months): " + text;
+                }
+            });
+        }
 
         if (nms_threshold != null) {
             nms_threshold.setOnBindEditTextListener(new EditTextPreference.OnBindEditTextListener() {

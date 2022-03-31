@@ -1,10 +1,27 @@
 <PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+    <PreferenceCategory
+        app:key="personal_category"
+        app:title="Personal Shit">
 
+        <EditTextPreference
+            app:key="water_amount"
+            app:title="Set Water Intake"/>
+
+        <EditTextPreference
+            app:key="weight"
+            app:title="Set weight (kg)"/>
+
+        <EditTextPreference
+            app:key="age_months"
+            app:title="Set age (months)"/>
+
+        <EditTextPreference
+            app:key="age_years"
+            app:title="Set age (years)"/>
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         app:key="technical_settings_category"

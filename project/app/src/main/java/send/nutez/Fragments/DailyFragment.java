@@ -70,7 +70,6 @@ public class DailyFragment extends Fragment {
 
     private void initIDs() {
         if (!GET_DAILY) {
-            getView().findViewById(R.id.textView6).setVisibility(View.INVISIBLE);
             getView().findViewById(R.id.imageView3).setVisibility(View.INVISIBLE);
         }
         dateText = getView().findViewById(R.id.dailyDateText);

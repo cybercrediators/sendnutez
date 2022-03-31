@@ -46,7 +46,7 @@ public class LowerButtonBarFragment extends Fragment {
             settingsButton.setEnabled(false);
         }
         if (this.getActivity() instanceof HistoryActivity) {
-            historyButton.setText("Daily");
+            //historyButton.setText("Daily");
             historyButton.setEnabled(false);
         }
     }

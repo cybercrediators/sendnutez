@@ -33,14 +33,14 @@
 
     <de.codecrafters.tableview.TableView
         android:id="@+id/historyTable"
-        android:layout_width="326dp"
-        android:layout_height="569dp"
+        android:layout_width="360dp"
+        android:layout_height="580dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398"
+        app:layout_constraintVertical_bias="0.366"
         app:tableView_columnCount="20"
         app:tableView_headerColor="@color/recovery_colorPrimaryDark">
 

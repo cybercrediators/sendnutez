@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new SliderPageAdapter(this);
         viewPager.setAdapter(pagerAdapter);
-        // TODO: set different view pager item (e.g. daily view) when clicking the specific button
         viewPager.setCurrentItem(1, false);
     }
 

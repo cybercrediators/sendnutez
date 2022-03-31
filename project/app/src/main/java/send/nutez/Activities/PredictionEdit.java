@@ -83,6 +83,7 @@ public class PredictionEdit extends AppCompatActivity {
             checkPicture(Uri.parse(getPathFromURI(data.getData())));
         } else {
             Toast.makeText(this, "Failed to pick an image!", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 

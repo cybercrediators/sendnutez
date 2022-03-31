@@ -28,7 +28,6 @@ public class IngredientEditorActivity extends AppCompatActivity {
     private String filepath;
     private HashMap<String, List<Float>> predictions;
 
-    private TextView detectedFoodString;
     private EditText searchFoodField;
     private ListView listView;
     private Button searchButton;
@@ -57,14 +56,12 @@ public class IngredientEditorActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        detectedFoodString.setText(predictions.keySet().toString());
         searchButton.setOnClickListener(addFoodButton);
         saveButton.setOnClickListener(saveMealButton);
         discardButton.setOnClickListener(discardListener);
     }
 
     private void initIDs() {
-        detectedFoodString = findViewById(R.id.detectedFoodString);
         searchButton = findViewById(R.id.searchFoodButton);
         saveButton = findViewById(R.id.saveMealButton);
         listView = findViewById(R.id.listView);
