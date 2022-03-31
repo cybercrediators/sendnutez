@@ -33,6 +33,7 @@ public class IngredientEditorActivity extends AppCompatActivity {
     private ListView listView;
     private Button searchButton;
     private Button saveButton;
+    private Button discardButton;
 
     //private ArrayList<String> data;
     private ArrayList<HashMap<String, String>> data;
@@ -59,6 +60,7 @@ public class IngredientEditorActivity extends AppCompatActivity {
         detectedFoodString.setText(predictions.keySet().toString());
         searchButton.setOnClickListener(addFoodButton);
         saveButton.setOnClickListener(saveMealButton);
+        discardButton.setOnClickListener(discardListener);
     }
 
     private void initIDs() {
@@ -66,6 +68,7 @@ public class IngredientEditorActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchFoodButton);
         saveButton = findViewById(R.id.saveMealButton);
         listView = findViewById(R.id.listView);
+        discardButton = findViewById(R.id.discardMealButton);
         searchFoodField = findViewById(R.id.searchFoodField);
         // Init array adapter
         //data = new ArrayList<String>();
@@ -82,6 +85,13 @@ public class IngredientEditorActivity extends AppCompatActivity {
         adapter = new IngredientAdapter(this, data);
         listView.setAdapter(adapter);
     }
+
+    View.OnClickListener discardListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            finish();
+        }
+    };
 
     View.OnClickListener addFoodButton = new View.OnClickListener() {
         @Override
