@@ -7,9 +7,25 @@
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
-        android:layout_width="411dp"
-        android:layout_height="666dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/takePictureButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+
+    <send.nutez.Overlays.RectOverlay
+        android:id="@+id/rectOver"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/previewView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
     <Button
         android:id="@+id/takePictureButton"
         android:layout_width="wrap_content"
@@ -19,5 +35,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/previewView" />
+
+    <Button
+        android:id="@+id/selectButton"
+        android:layout_width="93dp"
+        android:layout_height="42dp"
+        android:text="Select"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/takePictureButton"
+        app:layout_constraintTop_toBottomOf="@+id/previewView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

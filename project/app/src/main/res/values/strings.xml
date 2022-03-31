@@ -3,4 +3,5 @@
     <string name="main_camera_text">Camera</string>
     <string name="main_menu">Main Menu</string>
     <string name="water_button_string">+ 100 water</string>
+    <string name="prediction_window_string">Add Food</string>
 </resources>

@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,6 +16,10 @@ import send.nutez.model.Meal;
 import send.nutez.model.Nute;
 import send.nutez.utils.NuteDatabaseUtils;
 import send.nutez.utils.StorageDatabaseUtils;
+
+import send.nutez.Fragments.CameraFragment;
+import send.nutez.Fragments.MenuFragment;
+import send.nutez.Fragments.SlidingFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DEBUG_STRING = "LALALA";
