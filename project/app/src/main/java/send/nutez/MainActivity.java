@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.util.Log;
 
+import send.nutez.Fragments.DailyDetailViewFragment;
 import send.nutez.model.Nute;
 import send.nutez.utils.NuteDatabaseUtils;
 import send.nutez.utils.StorageDatabaseUtils;
@@ -19,7 +20,7 @@ import send.nutez.Fragments.SlidingFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static final String DEBUG_STRING = "LALALA";
-    private static final int PAGES = 3;
+    private static final int PAGES = 4;
 
     private ViewPager2 viewPager;
     private FragmentStateAdapter pagerAdapter;
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                     return new CameraFragment();
                 case 2:
                     return new DailyFragment();
+                case 3:
+                    DailyDetailViewFragment frag = new DailyDetailViewFragment();
+                    return frag;
                 default:
                     return new SlidingFragment();
             }

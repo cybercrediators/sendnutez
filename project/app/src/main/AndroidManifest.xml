@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SendNUTEZ">
         <activity
+            android:name=".Activities.MealDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.HistoryActivity"
             android:exported="false" />
         <activity
