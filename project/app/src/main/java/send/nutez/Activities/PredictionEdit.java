@@ -3,10 +3,12 @@ package send.nutez.Activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.preference.PreferenceManager;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -48,6 +50,10 @@ public class PredictionEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prediction_edit_layout);
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        threshold = Double.parseDouble(sharedPreferences.getString("threshold", ""));
+        nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", ""));
 
         Log.e("asdf", filepath);
         // TODO: CHECK IF YOU SELECTED IMAGE IN CAMERA FRAGMENT

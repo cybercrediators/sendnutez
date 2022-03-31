@@ -9,16 +9,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.util.Log;
 
-import org.greenrobot.greendao.database.Database;
-
-import send.nutez.model.Ingredient;
-import send.nutez.model.Meal;
 import send.nutez.model.Nute;
 import send.nutez.utils.NuteDatabaseUtils;
 import send.nutez.utils.StorageDatabaseUtils;
 
 import send.nutez.Fragments.CameraFragment;
-import send.nutez.Fragments.MenuFragment;
+import send.nutez.Fragments.DailyFragment;
 import send.nutez.Fragments.SlidingFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         pagerAdapter = new SliderPageAdapter(this);
         viewPager.setAdapter(pagerAdapter);
+        // TODO: set different view pager item (e.g. daily view) when clicking the specific button
         viewPager.setCurrentItem(1, false);
     }
 
@@ -77,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new CameraFragment();
                 case 2:
-                    return new MenuFragment();
+                    return new DailyFragment();
                 default:
                     return new SlidingFragment();
             }

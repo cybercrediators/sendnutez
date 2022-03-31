@@ -2,8 +2,8 @@ package send.nutez.Prediction;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.BuildConfig;
-import android.support.multidex.MultiDex;
+import androidx.multidex.BuildConfig;
+import androidx.multidex.MultiDex;
 import android.util.Log;
 
 import com.zxy.recovery.callback.RecoveryCallback;
