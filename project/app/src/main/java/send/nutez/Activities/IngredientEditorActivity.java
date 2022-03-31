@@ -1,5 +1,6 @@
 package send.nutez.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
@@ -85,14 +86,9 @@ public class IngredientEditorActivity extends AppCompatActivity {
     View.OnClickListener addFoodButton = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String value = searchFoodField.getText().toString();
-            if (value.isEmpty())
-                return;
-            HashMap<String, String> elem = new HashMap<String, String>();
-            elem.put("name", value);
-            elem.put("value", "0.5");
-            data.add(elem);
-            adapter.notifyDataSetChanged();
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setMessage("Do you really want to add " + searchFoodField.getText() + "?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
         }
     };
 
@@ -113,7 +109,15 @@ public class IngredientEditorActivity extends AppCompatActivity {
         }
     };
 
-    private void addElementToScrollView(String name) {
+    private void addElementToScrollView() {
+        String value = searchFoodField.getText().toString();
+        if (value.isEmpty())
+            return;
+        HashMap<String, String> elem = new HashMap<String, String>();
+        elem.put("name", value);
+        elem.put("value", "0.5");
+        data.add(elem);
+        adapter.notifyDataSetChanged();
     }
 
     // Ask if you want to add the found food
@@ -123,6 +127,7 @@ public class IngredientEditorActivity extends AppCompatActivity {
         public void onClick(DialogInterface dialog, int which) {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
+                    addElementToScrollView();
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:
