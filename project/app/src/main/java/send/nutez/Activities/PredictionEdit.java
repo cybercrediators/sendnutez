@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 
 import send.nutez.Prediction.Predictor;
 import send.nutez.R;
@@ -36,6 +37,8 @@ public class PredictionEdit extends AppCompatActivity {
     public static String filepath;
     private TextView predictionText;
     private Button selectImageButton;
+    private Button discardButton;
+    private Button continueButton;
     private Bitmap mutableBitmap;
     private ImageView preview;
     public static boolean selectImageToggle = false;
@@ -55,7 +58,7 @@ public class PredictionEdit extends AppCompatActivity {
         threshold = Double.parseDouble(sharedPreferences.getString("threshold", ""));
         nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", ""));
 
-        Log.e("asdf", filepath);
+        Log.e("asdf", " "+filepath);
         // TODO: CHECK IF YOU SELECTED IMAGE IN CAMERA FRAGMENT
         initID();
         predictor = new Predictor();
@@ -66,6 +69,8 @@ public class PredictionEdit extends AppCompatActivity {
         predictionText = findViewById(R.id.predictionText);
         selectImageButton = findViewById(R.id.selectImageButton);
         preview = findViewById(R.id.editPreviewView);
+        discardButton = findViewById(R.id.discardButton);
+        continueButton = findViewById(R.id.continueButton);
     }
 
     @Override
@@ -90,6 +95,7 @@ public class PredictionEdit extends AppCompatActivity {
             res = cursor.getString(column_index);
         }
         cursor.close();
+        filepath = res;
         return res;
     }
 
@@ -99,6 +105,24 @@ public class PredictionEdit extends AppCompatActivity {
         //intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_IMAGE);
     }
+
+    View.OnClickListener continueSelection = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            HashMap<String, List<Float>> predictions = predictor.getLastPredictedClasses();
+            Intent cont = new Intent(PredictionEdit.this, IngredientEditorActivity.class);
+            cont.putExtra("PRED_LIST", predictions);
+            cont.putExtra("IMG_PATH", filepath);
+            startActivity(cont);
+        }
+    };
+
+    View.OnClickListener discardSelection = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            finish();
+        }
+    };
 
     View.OnClickListener selectPictureListener = new View.OnClickListener() {
         @Override
@@ -111,6 +135,9 @@ public class PredictionEdit extends AppCompatActivity {
         // Choose image if you picked select image in the camera fragment
         // filepath = "file:///storage/emulated/0/Pictures/1648651002271.jpg";
         selectImageButton.setOnClickListener(selectPictureListener);
+        discardButton.setOnClickListener(discardSelection);
+        continueButton.setOnClickListener(continueSelection);
+
         if (selectImageToggle && filepath.isEmpty()) {
             selectImageToggle = false;
             selectImageFromGallery();
@@ -134,7 +161,6 @@ public class PredictionEdit extends AppCompatActivity {
                 width = image.getWidth();
                 height = image.getHeight();
 
-                // TODO: thresholds in settings menu
                 mutableBitmap = predictor.detectFromImage(mutableBitmap, threshold, nms_threshold);
                 final long dur = System.currentTimeMillis() - start;
                 runOnUiThread(new Runnable() {
