@@ -7,29 +7,29 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="351dp"
-        android:layout_height="140dp"
+        android:layout_width="349dp"
+        android:layout_height="228dp"
         android:rotation="-90"
         android:scaleY="1.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122"
+        app:layout_constraintVertical_bias="0.123"
         app:srcCompat="@drawable/arrow" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="351dp"
-        android:layout_height="140dp"
+        android:layout_width="349dp"
+        android:layout_height="248dp"
         android:rotation="90"
         android:scaleY="1.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827"
+        app:layout_constraintVertical_bias="0.837"
         app:srcCompat="@drawable/arrow" />
 
     <TextView
@@ -41,10 +41,9 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <TextView
         android:id="@+id/textView2"
@@ -55,19 +54,24 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.462" />
+        app:layout_constraintVertical_bias="0.431" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/addWaterButton"
+        android:layout_width="120dp"
+        android:layout_height="131dp"
+        android:backgroundTint="@color/material_dynamic_primary60"
+        android:fadingEdge="vertical|none"
         android:text="@string/water_button_string"
+        app:cornerRadius="100dp"
+        app:iconPadding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.59" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

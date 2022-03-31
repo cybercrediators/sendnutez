@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="96dp"
+        android:layout_height="36dp"
+        android:rotation="90"
+        android:scaleY="1.4"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mealDetailTable"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="212dp"
+        android:layout_height="32dp"
+        android:text="@string/overview_string"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021" />
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/waterProgressBar"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        app:cpb_background_progressbar_color="@color/recovery_colorAccent"
+        app:cpb_background_progressbar_width="0dp"
+        app:cpb_indeterminate_mode="false"
+        app:cpb_progress="12"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progress_max="100"
+        app:cpb_progressbar_color="@color/material_dynamic_primary40"
+        app:cpb_progressbar_width="20dp"
+        app:cpb_round_border="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.129" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="73dp"
+        android:layout_height="26dp"
+        android:text="Water"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/waterProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/waterProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/waterProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/waterProgressBar"
+        app:layout_constraintVertical_bias="0.31" />
+
+    <TextView
+        android:id="@+id/foodAmountText"
+        android:layout_width="44dp"
+        android:layout_height="31dp"
+        android:text="0%"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/foodProgressBar"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/foodProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/foodProgressBar"
+        app:layout_constraintVertical_bias="0.496" />
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/foodProgressBar"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        app:cpb_background_progressbar_color="@color/recovery_colorAccent"
+        app:cpb_background_progressbar_width="0dp"
+        app:cpb_indeterminate_mode="false"
+        app:cpb_progress="12"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progress_max="100"
+        app:cpb_progressbar_color="@color/design_default_color_error"
+        app:cpb_progressbar_width="25dp"
+        app:cpb_round_border="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.129" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="73dp"
+        android:layout_height="26dp"
+        android:text="Food"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/foodProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/foodProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/foodProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/foodProgressBar"
+        app:layout_constraintVertical_bias="0.31" />
+
+    <TextView
+        android:id="@+id/waterAmountText"
+        android:layout_width="44dp"
+        android:layout_height="31dp"
+        android:text="0%"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/waterProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/waterProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/waterProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/waterProgressBar" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="send.nutez.Fragments.LowerButtonBarFragment"
+        android:layout_width="394dp"
+        android:layout_height="79dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waterProgressBar"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/dailyDateText"
+        android:layout_width="141dp"
+        android:layout_height="32dp"
+        android:text="Date"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.017" />
+
+    <de.codecrafters.tableview.TableView
+        android:id="@+id/historyTable"
+        android:layout_width="372dp"
+        android:layout_height="347dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyDateText"
+        app:layout_constraintVertical_bias="0.832"
+        app:tableView_columnCount="20"
+        app:tableView_headerColor="@color/recovery_colorPrimaryDark" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

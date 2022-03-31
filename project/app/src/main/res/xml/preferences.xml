@@ -1,0 +1,49 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="personal_category"
+        app:title="Personal Shit">
+
+        <EditTextPreference
+            app:key="water_amount"
+            app:title="Set Water Intake"/>
+
+        <EditTextPreference
+            app:key="weight"
+            app:title="Set weight (kg)"/>
+
+        <EditTextPreference
+            app:key="age_months"
+            app:title="Set age (months)"/>
+
+        <EditTextPreference
+            app:key="age_years"
+            app:title="Set age (years)"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="technical_settings_category"
+        app:title="Internal Shit">
+
+        <EditTextPreference
+            app:key="threshold"
+            app:title="Set threshold"/>
+
+        <EditTextPreference
+            app:key="nms_threshold"
+            app:title="Set nms threshold"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="random_shit"
+        app:title="Random shit">
+
+        <Preference
+            app:key="feedback"
+            app:title="Send feedback"
+            app:summary="Report technical issues or suggest new features... /s"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

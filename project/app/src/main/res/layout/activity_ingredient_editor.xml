@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.IngredientEditorActivity">
+
+    <TextView
+        android:id="@+id/detectedFoodString2"
+        android:layout_width="307dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:text="Add and Edit Ingredients"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/predictionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prediction_window_string"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021" />
+
+    <Button
+        android:id="@+id/saveMealButton"
+        android:layout_width="175dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Save"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/discardMealButton"
+        android:layout_width="175dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/design_default_color_error"
+        android:text="Back"
+        app:cornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/searchFoodButton"
+        android:layout_width="133dp"
+        android:layout_height="54dp"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:text="Search"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.886" />
+
+    <EditText
+        android:id="@+id/searchFoodField"
+        android:layout_width="213dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Search for Food..."
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="0.708" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="362dp"
+        android:layout_height="522dp"
+        app:layout_constraintBottom_toTopOf="@+id/saveMealButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="0.888" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

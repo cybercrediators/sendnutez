@@ -7,15 +7,15 @@
 
     <ImageView
         android:id="@+id/editPreviewView"
-        android:layout_width="314dp"
-        android:layout_height="305dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="331dp"
+        android:layout_height="388dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/purple_200"
-        tools:srcCompat="@color/purple_200" />
+        app:srcCompat="@color/material_dynamic_primary20"
+        tools:srcCompat="@color/material_dynamic_primary20" />
 
     <TextView
         android:id="@+id/textView3"
@@ -25,79 +25,83 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editPreviewView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/predictionText"
-        android:layout_width="376dp"
-        android:layout_height="33dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editPreviewView"
+        android:layout_width="370dp"
+        android:layout_height="63dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/discardButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="136dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="30dp"
-        android:text="Edit"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editPreviewView"
         app:layout_constraintTop_toBottomOf="@+id/editPreviewView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Enter amount"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.387" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="152dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="48dp"
+        android:id="@+id/continueButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:text="Continue"
+        app:cornerRadius="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toEndOf="@+id/discardButton" />
+
+    <Button
+        android:id="@+id/discardButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/design_default_color_error"
         android:text="Discard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAmount"
-        app:layout_constraintVertical_bias="0.503" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="138dp"
-        android:layout_height="56dp"
-        android:text="Save"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.328"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/editAmount"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/selectImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SelectImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_baseline_image_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.304" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="94dp"
+        android:layout_height="36dp"
+        android:text="I detected:"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/predictionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPreviewView"
+        app:layout_constraintVertical_bias="0.318" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="324dp"
+        android:layout_height="40dp"
+        android:text="You can add more ingredients in the next window btw."
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/predictionText"
+        app:layout_constraintVertical_bias="0.753" />
 </androidx.constraintlayout.widget.ConstraintLayout>

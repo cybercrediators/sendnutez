@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,6 +44,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -109,7 +111,6 @@ public class CameraFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         previewView = view.findViewById(R.id.previewView);
         rectOverlay = view.findViewById(R.id.rectOver);
-
         if (allPermissionsGranted()) {
             startCamera();
         } else {
@@ -163,6 +164,11 @@ public class CameraFragment extends Fragment {
         super.onResume();
         Log.e("Resume", "RESUME");
         livePreview.set(true);
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+        threshold = Double.parseDouble(sharedPreferences.getString("threshold", ""));
+        nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", ""));
+
         startCamera();
     }
 

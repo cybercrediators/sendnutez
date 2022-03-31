@@ -82,8 +82,12 @@ dependencies {
     implementation 'androidx.camera:camera-video:1.1.0-beta02'
     implementation 'androidx.camera:camera-view:1.1.0-beta02'
     implementation 'androidx.camera:camera-extensions:1.1.0-beta02'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.github.Sunzxyong.Recovery:recovery:1.0.0'
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    implementation 'com.github.ISchwarz23:SortableTableView:v2.8.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'androidx.preference:preference:1.2.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

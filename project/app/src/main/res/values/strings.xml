@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">send NUTEZ</string>
     <string name="main_camera_text">Camera</string>
-    <string name="main_menu">Main Menu</string>
+    <string name="main_menu">Menu</string>
     <string name="water_button_string">+ 100 water</string>
     <string name="prediction_window_string">Add Food</string>
+    <string name="overview_string">Daily Overview</string>
 </resources>
