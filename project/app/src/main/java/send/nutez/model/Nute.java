@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity(indexes = {@Index(value = "name", unique = true)}) //makes the name col unique
 public class Nute {
+
     @Id(autoincrement = true)
     public Long id;
 

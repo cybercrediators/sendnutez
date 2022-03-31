@@ -18,7 +18,7 @@ public class IngredientNuteValue {
     private Nute nute;
 
     private long ingredient_id;
-    private float value;
+    private double value;
 
     public IngredientNuteValue(Nute nute, float value) {
         this.nute = nute;
@@ -32,9 +32,8 @@ public class IngredientNuteValue {
     /** Used for active entity operations. */
     @Generated(hash = 1558698494)
     private transient IngredientNuteValueDao myDao;
-    @Generated(hash = 906030374)
-    public IngredientNuteValue(Long id, long nute_id, long ingredient_id,
-            float value) {
+    @Generated(hash = 308095262)
+    public IngredientNuteValue(Long id, long nute_id, long ingredient_id, double value) {
         this.id = id;
         this.nute_id = nute_id;
         this.ingredient_id = ingredient_id;
@@ -61,10 +60,10 @@ public class IngredientNuteValue {
     public void setIngredient_id(long ingredient_id) {
         this.ingredient_id = ingredient_id;
     }
-    public float getValue() {
+    public double getValue() {
         return this.value;
     }
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
     @Generated(hash = 1980786776)

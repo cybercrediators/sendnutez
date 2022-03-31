@@ -1,0 +1,60 @@
+package send.nutez.utils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import send.nutez.model.Meal;
+import send.nutez.model.Nute;
+import send.nutez.model.NuteReferenceValue;
+import send.nutez.model.Person;
+import send.nutez.model.PersonNuteReferences;
+
+public class ScoreCalculator {
+    private static Person getPerson() {
+        return new Person();
+    }
+
+    public static int getFoodPercentage(long dayMillis) {
+        Person person = getPerson();
+        PersonNuteReferences personNuteReferences = StorageDatabaseUtils.getPersonNuteReferences(person);
+        List<Meal> mealList = StorageDatabaseUtils.getMealsForDay(dayMillis);
+        Map<String, Double> nuteValues = new HashMap<>();
+
+        for(Nute n: StorageDatabaseUtils.getAllNutes()) {
+            double val = 0.0;
+            for(Meal m : mealList) {
+                val += m.getTotalNutrientValue(n);
+            }
+            nuteValues.put(n.getName(), val);
+        }
+        double ret = 0.0;
+        int c = 0;
+        for(String nuteName : nuteValues.keySet()) {
+            double val = nuteValues.get(nuteName);
+            NuteReferenceValue nuteReferenceValue = personNuteReferences.referenceValueMap.get(nuteName);
+            double ref = nuteReferenceValue.getReference_value();
+            double percentage = val / nuteReferenceValue.getReference_value();
+
+            if(ref == 0.0)
+                percentage = 0;
+            if(percentage > 1) {
+                double tmp = percentage - (int) percentage;
+                if(tmp > 1) { //TODO if too much tell user
+                    percentage = 0;
+                } else {
+                    percentage -= tmp;
+                }
+            }
+            ret += percentage;
+            c++;
+        }
+        if(c > 0)
+            return Math.round((float)(ret/(float) c));
+        return 0;
+    }
+
+    public static int getWaterPercentage() {
+        return 0;
+    }
+}

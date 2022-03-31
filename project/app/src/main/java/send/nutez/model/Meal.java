@@ -34,6 +34,23 @@ public class Meal {
         this.ingredients = new ArrayList<>();
         this.creationDate = new Date(System.currentTimeMillis());
     }
+
+
+    public double getTotalNutrientValue(Nute n) {
+        double d = 0.0;
+        if(getIngredients() != null) {
+            for (Ingredient ingredient : getIngredients()) {
+                for (IngredientNuteValue val : ingredient.getNutrients()) {
+                    if (val.getNute_id() == n.id) {
+                        d += val.getValue() * ingredient.getQuantity() / 100.0; //referece value for 100g
+                        break;
+                    }
+                }
+            }
+        }
+        return d;
+    }
+
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
