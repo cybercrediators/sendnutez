@@ -19,6 +19,9 @@ public class Ingredient {
     private String name;
 
     @Property
+    private String informations;
+
+    @Property
     private String unit;
 
     @ToMany(referencedJoinProperty = "ingredient_id")
@@ -29,17 +32,6 @@ public class Ingredient {
 
     private long meal_id;
 
-    public void addIngredientNuteValue(IngredientNuteValue ingredientNuteValue) {
-        ingredientNuteValue.setIngredient_id(id);
-        nutrients.add(ingredientNuteValue);
-    }
-
-    public Ingredient(String name, float quantity) {
-        this.name = name;
-        this.quantity = quantity;
-        nutrients = new ArrayList<>();
-    }
-
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -48,18 +40,9 @@ public class Ingredient {
     @Generated(hash = 942581853)
     private transient IngredientDao myDao;
 
-    @Generated(hash = 2096527001)
-    public Ingredient(Long id, String name, String unit, float quantity,
-            long meal_id) {
-        this.id = id;
-        this.name = name;
-        this.unit = unit;
-        this.quantity = quantity;
-        this.meal_id = meal_id;
-    }
-
-    @Generated(hash = 1584798654)
-    public Ingredient() {
+    public void addIngredientNuteValue(IngredientNuteValue ingredientNuteValue) {
+        ingredientNuteValue.setIngredient_id(id);
+        nutrients.add(ingredientNuteValue);
     }
 
     public Long getId() {
@@ -76,6 +59,14 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getInformations() {
+        return this.informations;
+    }
+
+    public void setInformations(String informations) {
+        this.informations = informations;
     }
 
     public String getUnit() {
@@ -173,5 +164,26 @@ public class Ingredient {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getIngredientDao() : null;
+    }
+
+    public Ingredient(String name, float quantity) {
+        this.name = name;
+        this.quantity = quantity;
+        nutrients = new ArrayList<>();
+    }
+
+    @Generated(hash = 1862526597)
+    public Ingredient(Long id, String name, String informations, String unit,
+            float quantity, long meal_id) {
+        this.id = id;
+        this.name = name;
+        this.informations = informations;
+        this.unit = unit;
+        this.quantity = quantity;
+        this.meal_id = meal_id;
+    }
+
+    @Generated(hash = 1584798654)
+    public Ingredient() {
     }
 }
