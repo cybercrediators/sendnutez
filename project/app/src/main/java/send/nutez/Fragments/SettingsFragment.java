@@ -1,5 +1,6 @@
 package send.nutez.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import send.nutez.R;
+import send.nutez.model.Person;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
@@ -109,7 +111,5 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 }
             });
         }
-
     }
-
 }

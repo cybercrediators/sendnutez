@@ -28,7 +28,7 @@ public class ScoreCalculator {
         int i = 0;
         for(String s : map.keySet()) {
             ret[i][0] = s;
-            ret[i][1] = Long.toString(Math.round(getNutrientPercentage(s, map.get(s))));
+            ret[i][1] = Long.toString(Math.round(getNutrientPercentage(s, map.get(s) * 100)));
             i++;
         }
         return ret;
@@ -41,7 +41,7 @@ public class ScoreCalculator {
         int i = 0;
         for(String s : map.keySet()) {
             ret[i][0] = s;
-            ret[i][1] = Long.toString(Math.round(getNutrientPercentage(s, map.get(s))));
+            ret[i][1] = Long.toString(Math.round(getNutrientPercentage(s, map.get(s) * 100)));
             i++;
         }
         return ret;
@@ -49,6 +49,9 @@ public class ScoreCalculator {
 
     private static double getNutrientPercentage(String nuteName, double value) {
         Person person = getPerson();
+        if(nuteName.equals("Water")) {
+            int a = 0;
+        }
         PersonNuteReferences personNuteReferences = StorageDatabaseUtils.getPersonNuteReferences(person);
         NuteReferenceValue nuteReferenceValue = personNuteReferences.referenceValueMap.get(nuteName);
         double ref = nuteReferenceValue.getReference_value();
@@ -73,7 +76,7 @@ public class ScoreCalculator {
         }
 
         if(c > 0) {
-            return Math.round((float) (ret / (float) c));
+            return Math.round((float) (ret / (float) c) * 100);
         }
         return 0;
     }

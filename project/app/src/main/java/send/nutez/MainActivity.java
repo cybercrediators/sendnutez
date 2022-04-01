@@ -8,6 +8,7 @@ import androidx.preference.PreferenceManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PermissionHandler.initialize(this);
+        updatePerson(getApplicationContext());
 
         //Important! Don't to shit with data above this line
         NuteDatabaseUtils.initialize(getApplicationContext());
@@ -64,15 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
         //addWater(100);
         //test2();
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        int weight = Integer.parseInt(sharedPreferences.getString("weight", "75"));
-        int age_months = Integer.parseInt(sharedPreferences.getString("months", "10"));
-        int age_years = Integer.parseInt(sharedPreferences.getString("years", "20"));
-        int age = age_years * 12 + age_months;
-        Log.e("AGE", age + "");
-        boolean gender = sharedPreferences.getBoolean("gender", false);
-        person = new Person(age, Person.FITNESS_LEVEL.MEDIUM, weight, gender);
     }
 
 
@@ -192,4 +185,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public static void updatePerson(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        int weight = Integer.parseInt(sharedPreferences.getString("weight", "75"));
+        int age_months = Integer.parseInt(sharedPreferences.getString("months", "10"));
+        int age_years = Integer.parseInt(sharedPreferences.getString("years", "20"));
+        int age = age_years * 12 + age_months;
+        boolean gender = sharedPreferences.getBoolean("gender", false);
+        MainActivity.person = new Person(age, Person.FITNESS_LEVEL.MEDIUM, weight, gender);
+    }
 }
