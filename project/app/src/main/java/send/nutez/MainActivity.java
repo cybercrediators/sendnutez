@@ -127,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                     double val = ScoreCalculator.getFoodPercentage(System.currentTimeMillis());
+                    double wal = ScoreCalculator.getWaterPercentage(System.currentTimeMillis());
                     Log.d(DEBUG_STRING, "percentage" + String.valueOf(val));
+                    Log.d(DEBUG_STRING, "percentage" + String.valueOf(wal));
                 }
             }
         });

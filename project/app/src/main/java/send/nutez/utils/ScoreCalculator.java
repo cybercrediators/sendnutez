@@ -9,6 +9,7 @@ import send.nutez.model.Nute;
 import send.nutez.model.NuteReferenceValue;
 import send.nutez.model.Person;
 import send.nutez.model.PersonNuteReferences;
+import send.nutez.model.Unit;
 
 public class ScoreCalculator {
     private static Person getPerson() {
@@ -54,7 +55,18 @@ public class ScoreCalculator {
         return 0;
     }
 
-    public static int getWaterPercentage() {
-        return 0;
+    public static int getWaterPercentage(long dayMillis) {
+        Person person = getPerson();
+        List<Meal> mealList = StorageDatabaseUtils.getMealsForDay(dayMillis);
+        float ret = 0.0f;
+        PersonNuteReferences personNuteReferences = StorageDatabaseUtils.getPersonNuteReferences(person);
+        NuteReferenceValue nuteReferenceValue = personNuteReferences.referenceValueMap.get("Water");
+        for(Meal m : mealList) {
+            if(m.getName().equals("WATER") && m.getIngredients().size() == 1) {
+                ret += Unit.ml.convert(Unit.L, m.getIngredients().get(0).getQuantity());
+            }
+        }
+        float val = ret / nuteReferenceValue.getReference_value();
+        return Math.round(val * 100);
     }
 }
