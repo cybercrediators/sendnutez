@@ -38,7 +38,6 @@ public class Meal {
         this.creationDate = new Date(System.currentTimeMillis());
     }
 
-
     public double getTotalNutrientValue(Nute n) {
         double d = 0.0;
         if(getIngredients() != null) {
@@ -51,12 +50,8 @@ public class Meal {
                         Unit u2 = Unit.getUnit(unit2);
                         if(u2 == null)
                             u2 = u1;
-                        Log.d(MainActivity.DEBUG_STRING, unit1 + " " + unit2 + " " + n.getName());
-                        Log.d(MainActivity.DEBUG_STRING, u1 + " " + u2 + " " + n.getName());
                         double con = u2.convert(u1, val.getValue());
                         d += con * ingredient.getQuantity() / 100.0; //referece value for 100g
-                        Log.d(MainActivity.DEBUG_STRING, Double.toString(val.getValue()) + " " + Double.toString(con));
-                        Log.d(MainActivity.DEBUG_STRING, "---");
                         break;
                     }
                 }

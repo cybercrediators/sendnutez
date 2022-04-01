@@ -16,43 +16,90 @@ public class ScoreCalculator {
         return new Person();
     }
 
-    public static int getFoodPercentage(long dayMillis) {
+    public static String[][] getDayDetailTable(long dayMillis) {
+        Map<String, Double> map = getDayDetails(dayMillis);
+        String[][] ret = new String[map.keySet().size()][2];
+
+        int i = 0;
+        for(String s : map.keySet()) {
+            ret[i][0] = s;
+            ret[i][1] = Long.toString(Math.round(getNutrientPercentage(s, map.get(s))));
+            i++;
+        }
+        return ret;
+    }
+
+    public static String[][] getMealDetailTable(Meal meal) {
+        Map<String, Double> map = getMealDetails(meal);
+        String[][] ret = new String[map.keySet().size()][2];
+
+        int i = 0;
+        for(String s : map.keySet()) {
+            ret[i][0] = s;
+            ret[i][1] = Long.toString(Math.round(getNutrientPercentage(s, map.get(s))));
+            i++;
+        }
+        return ret;
+    }
+
+    private static double getNutrientPercentage(String nuteName, double value) {
         Person person = getPerson();
         PersonNuteReferences personNuteReferences = StorageDatabaseUtils.getPersonNuteReferences(person);
-        List<Meal> mealList = StorageDatabaseUtils.getMealsForDay(dayMillis);
+        NuteReferenceValue nuteReferenceValue = personNuteReferences.referenceValueMap.get(nuteName);
+        double ref = nuteReferenceValue.getReference_value();
+        if(ref == 0.0)
+            ref = 1.0;
+
+        double percentage = value / ref;
+        return percentage;
+    }
+
+    public static int getFoodPercentage(long dayMillis) {
+        Map<String, Double> nuteValues = getDayDetails(dayMillis);
+
+        double ret = 0.0;
+        int c = 0;
+
+        for(String nuteName : nuteValues.keySet()) {
+            double val = nuteValues.get(nuteName);
+            double percentage = getNutrientPercentage(nuteName, val);
+            ret += percentage;
+            c++;
+        }
+
+        if(c > 0) {
+            return Math.round((float) (ret / (float) c));
+        }
+        return 0;
+    }
+
+    public static Map<String, Double> getMealDetails(Meal meal) {
         Map<String, Double> nuteValues = new HashMap<>();
 
         for(Nute n: StorageDatabaseUtils.getAllNutes()) {
             double val = 0.0;
-            for(Meal m : mealList) {
-                val += m.getTotalNutrientValue(n);
-            }
+            val += meal.getTotalNutrientValue(n);
             nuteValues.put(n.getName(), val);
         }
-        double ret = 0.0;
-        int c = 0;
-        for(String nuteName : nuteValues.keySet()) {
-            double val = nuteValues.get(nuteName);
-            NuteReferenceValue nuteReferenceValue = personNuteReferences.referenceValueMap.get(nuteName);
-            double ref = nuteReferenceValue.getReference_value();
-            double percentage = val / nuteReferenceValue.getReference_value();
+        return nuteValues;
+    }
 
-            if(ref == 0.0)
-                percentage = 0;
-            if(percentage > 1) {
-                double tmp = percentage - (int) percentage;
-                if(tmp > 1) { //TODO if too much tell user
-                    percentage = 0;
-                } else {
-                    percentage -= tmp;
+    public static Map<String, Double> getDayDetails(long dayMillis) {
+        List<Meal> mealList = StorageDatabaseUtils.getMealsForDay(dayMillis);
+        Map<String, Double> nuteValues = new HashMap<>();
+
+        for(Meal m : mealList) {
+            Map<String, Double> mealDetails = getMealDetails(m);
+            for(String nuteName : mealDetails.keySet()) {
+                double val = 0.0;
+                if(nuteValues.containsKey(nuteName)) {
+                    val = nuteValues.get(nuteName);
                 }
+                val += mealDetails.get(nuteName);
+                nuteValues.put(nuteName, val);
             }
-            ret += percentage;
-            c++;
         }
-        if(c > 0)
-            return Math.round((float)(ret/(float) c));
-        return 0;
+        return nuteValues;
     }
 
     public static int getWaterPercentage(long dayMillis) {
