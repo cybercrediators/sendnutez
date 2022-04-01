@@ -1,9 +1,11 @@
 package send.nutez.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +20,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.EmptyCoroutineContext;
 import send.nutez.DataAdapters.IngredientAdapter;
 import send.nutez.MainActivity;
 import send.nutez.R;
+import send.nutez.model.Meal;
+import send.nutez.utils.DataGetterThingy;
 
 public class IngredientEditorActivity extends AppCompatActivity {
 
@@ -29,10 +37,12 @@ public class IngredientEditorActivity extends AppCompatActivity {
     private HashMap<String, List<Float>> predictions;
 
     private EditText searchFoodField;
+    private EditText namefield;
     private ListView listView;
     private Button searchButton;
     private Button saveButton;
     private Button discardButton;
+    private String mealName;
 
     //private ArrayList<String> data;
     private ArrayList<HashMap<String, String>> data;
@@ -63,6 +73,7 @@ public class IngredientEditorActivity extends AppCompatActivity {
 
     private void initIDs() {
         searchButton = findViewById(R.id.searchFoodButton);
+        namefield = findViewById(R.id.mealNamefield);
         saveButton = findViewById(R.id.saveMealButton);
         listView = findViewById(R.id.listView);
         discardButton = findViewById(R.id.discardMealButton);
@@ -103,18 +114,43 @@ public class IngredientEditorActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Log.e("Save", "save food");
-            String allValues="";
-            ArrayList<String> valueList = new ArrayList<String>();
-            for (int i=0;i<adapter.getCount();i++){
-                //Log.e("OUT", ((HashMap<String, String>)adapter.getItem(i)).get("value") + " " + ((HashMap<String, String>)adapter.getItem(i)).get("name"));
-                allValues +=((HashMap<String,String>)adapter.getItem(i)).get("value")+ ",";
-                valueList.add(((HashMap<String,String>)adapter.getItem(i)).get("value"));
-            }
-            // use this valueList as per ur requirement
-            allValues = allValues.substring(0,allValues.length()-1);
-            Toast.makeText(IngredientEditorActivity.this, allValues, Toast.LENGTH_LONG).show();
+            if (namefield != null)
+                mealName = namefield.getText().toString();
+            addMealToDatabase(mealName);
+            switchBackToMain();
         }
     };
+
+    private void addMealToDatabase(String mealName) {
+        Map<String, Float> recipe = new HashMap<>();
+        for (int i=0;i<adapter.getCount();i++){
+            //Log.e("OUT", ((HashMap<String, String>)adapter.getItem(i)).get("value") + " " + ((HashMap<String, String>)adapter.getItem(i)).get("name"));
+            HashMap<String, String> val = (HashMap<String, String>) adapter.getItem(i);
+            recipe.put(val.get("name"), Float.parseFloat(val.get("value")));
+        }
+        DataGetterThingy.getMeal(recipe, new Continuation<Meal>() {
+            @NonNull
+            @Override
+            public CoroutineContext getContext() {
+                return EmptyCoroutineContext.INSTANCE;
+            }
+
+            @Override
+            public void resumeWith(@NonNull Object o) {
+                if (o instanceof Meal) {
+                    Meal meal = (Meal) o;
+                    Toast.makeText(getApplicationContext(), "added meal " + meal.getName(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Meal could not be added!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, mealName);
+    }
+
+    private void switchBackToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     private void addElementToScrollView() {
         String value = searchFoodField.getText().toString();

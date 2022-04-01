@@ -166,8 +166,8 @@ public class CameraFragment extends Fragment {
         livePreview.set(true);
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-        threshold = Double.parseDouble(sharedPreferences.getString("threshold", ""));
-        nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", ""));
+        threshold = Double.parseDouble(sharedPreferences.getString("threshold", "0.15"));
+        nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", "0.7"));
 
         startCamera();
     }

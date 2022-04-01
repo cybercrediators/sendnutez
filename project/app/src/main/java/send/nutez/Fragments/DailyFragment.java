@@ -13,14 +13,21 @@ import androidx.fragment.app.Fragment;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import send.nutez.Activities.HistoryActivity;
 import send.nutez.Activities.MealDetailActivity;
+import send.nutez.DataAdapters.TableHelper;
 import send.nutez.MainActivity;
 import send.nutez.R;
+import send.nutez.model.Meal;
+import send.nutez.utils.StorageDatabaseUtils;
 
 public class DailyFragment extends Fragment {
 
@@ -28,7 +35,11 @@ public class DailyFragment extends Fragment {
     // TODO: set data correctly
     private int waterAmount = 13;
     private int foodScore = 55;
+    public int year = 0;
+    public int month = 0;
+    public int date = 0;
     public String dateSTR = "ES IST DER HEUTIGE TAG";
+    public String mealHeaderString = "You ate today";
 
     // UI Ids
     TextView dateText = null;
@@ -40,6 +51,17 @@ public class DailyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         return (ViewGroup) inflater.inflate(R.layout.daily_layout, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (GET_DAILY) {
+            year = Calendar.getInstance().get(Calendar.YEAR);
+            month = Calendar.getInstance().get(Calendar.MONTH);
+            date = Calendar.getInstance().get(Calendar.DATE);
+        }
+        setData();
     }
 
     @Override
@@ -59,11 +81,13 @@ public class DailyFragment extends Fragment {
         @Override
         public void onDataClicked(int rowindex, String[] clickedDetail) {
             String dayString = "";
-            for (String s:clickedDetail)
-                dayString += s;
+            if (clickedDetail.length > 0)
+                dayString = clickedDetail[1];
+            //for (String s:clickedDetail)
+            //    dayString += s;
             Toast.makeText(getContext(), dayString, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), MealDetailActivity.class);
-            intent.putExtra("HEADER_TEXT", dayString);
+            intent.putExtra("MEAL_ID", dayString);
             getActivity().startActivity(intent);
         }
     }
@@ -80,12 +104,18 @@ public class DailyFragment extends Fragment {
     }
 
     public void setData() {
+        dateSTR = date + "." + (month + 1) + "." + year;
         dateText.setText(dateSTR);
+        List<Meal> meals = StorageDatabaseUtils.getMealsForDay(year, month, date);
+        String[] mealHeader = { mealHeaderString, "ID" };
+        String[][] mealData = TableHelper.mealsToTable(meals);
+
         foodText.setText(foodScore + "%");
         waterText.setText(waterAmount + "%");
         waterBar.setProgress(waterAmount);
         foodBar.setProgress(foodScore);
-        fillDemoTable();
+        fillDailyTable(mealHeader, mealData);
+        //fillDemoTable();
     }
 
     // DEMO TABLE DATA
@@ -108,9 +138,9 @@ public class DailyFragment extends Fragment {
         tv.addDataClickListener(new DetailClickListener());
         SimpleTableDataAdapter sa = new SimpleTableDataAdapter(getContext(), data);
         SimpleTableHeaderAdapter ha = new SimpleTableHeaderAdapter(getContext(), header);
-        ha.setTextColor(Color.RED);
+        ha.setTextColor(Color.LTGRAY);
         ha.setTextSize(20);
-        sa.setTextColor(Color.RED);
+        sa.setTextColor(Color.LTGRAY);
         sa.setTextSize(15);
         tv.setColumnCount(header.length);
         tv.setHeaderAdapter(ha);

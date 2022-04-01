@@ -10,7 +10,7 @@
         android:id="@+id/detectedFoodString2"
         android:layout_width="307dp"
         android:layout_height="41dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Add and Edit Ingredients"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -88,15 +88,41 @@
         app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
         app:layout_constraintVertical_bias="0.978" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="362dp"
-        android:layout_height="522dp"
+    <EditText
+        android:id="@+id/mealNamefield"
+        android:layout_width="306dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:hint="Enter Mealname..."
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/discardMealButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.871" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="361dp"
+        android:layout_height="445dp"
+        app:layout_constraintBottom_toTopOf="@+id/discardMealButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="0.221" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="(enter amount in (g))"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

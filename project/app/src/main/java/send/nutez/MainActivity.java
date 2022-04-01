@@ -9,10 +9,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import send.nutez.Fragments.DailyDetailViewFragment;
 import send.nutez.model.Nute;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,9 +58,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(1, false);
 
-
-        addWater();
-        test2();
+        //addWater(100);
+        //test2();
     }
 
 
@@ -83,7 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new CameraFragment();
                 case 2:
-                    return new DailyFragment();
+                    DailyFragment f = new DailyFragment();
+                    f.year = Calendar.getInstance().get(Calendar.YEAR);
+                    f.month = Calendar.getInstance().get(Calendar.MONTH);
+                    f.date = Calendar.getInstance().get(Calendar.DATE);
+                    f.mealHeaderString = "You ate today";
+                    f.GET_DAILY = true;
+                    return f;
                 case 3:
                     DailyDetailViewFragment frag = new DailyDetailViewFragment();
                     return frag;
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addWater() {
+    public static void addWater(int amount) {
         DataGetterThingy.addWater(100, new Continuation<Boolean>() {
             @NonNull
             @Override
@@ -152,11 +161,11 @@ public class MainActivity extends AppCompatActivity {
                 if(o instanceof Boolean) {
                     if((Boolean) o) {
                         //DO stuff in view
-                        Toast.makeText(getApplicationContext(),"added water", Toast.LENGTH_LONG).show();
                         Log.d(DEBUG_STRING, "added water");
                     }
                 }
             }
         });
     }
+
 }

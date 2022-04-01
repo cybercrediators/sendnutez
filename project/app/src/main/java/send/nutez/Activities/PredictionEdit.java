@@ -55,8 +55,8 @@ public class PredictionEdit extends AppCompatActivity {
         setContentView(R.layout.prediction_edit_layout);
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
-        threshold = Double.parseDouble(sharedPreferences.getString("threshold", ""));
-        nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", ""));
+        threshold = Double.parseDouble(sharedPreferences.getString("threshold", "0.15"));
+        nms_threshold = Double.parseDouble(sharedPreferences.getString("nms_threshold", "0.7"));
 
         Log.e("asdf", " "+filepath);
         // TODO: CHECK IF YOU SELECTED IMAGE IN CAMERA FRAGMENT

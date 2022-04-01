@@ -68,6 +68,16 @@ public class StorageDatabaseUtils {
         return daoSession.getNuteDao().loadAll();
     }
 
+    public static Meal getMealByID(long id) {
+        try {
+            return daoSession.getMealDao().queryBuilder().where(MealDao.Properties.Id.eq(id)).limit(1).unique();
+        } catch (Exception e) {
+            Log.e(DEBUG_STRING, e.getMessage());
+        }
+        return null;
+
+    }
+
     public static Nute getNuteByName(String name) {
         try {
             return daoSession.getNuteDao().queryBuilder().where(NuteDao.Properties.Name.eq(name)).limit(1).unique();
