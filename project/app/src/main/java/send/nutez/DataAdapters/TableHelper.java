@@ -21,9 +21,10 @@ public class TableHelper {
 
     public static String[][] singleMealToTable(Meal m) {
         List<Ingredient> is = m.getIngredients();
-        String[][] strMeal = new String[is.size()][1];
+        String[][] strMeal = new String[is.size()][2];
         for (int i = 0; i < is.size(); i++) {
-            strMeal[i][0] = is.get(i).getInformations();
+            strMeal[i][0] = is.get(i).getName();
+            strMeal[i][1] = is.get(i).getInformations();
         }
         return strMeal;
     }

@@ -13,6 +13,7 @@ import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import send.nutez.R;
+import send.nutez.utils.ScoreCalculator;
 
 public class DailyDetailViewFragment extends Fragment {
 
@@ -27,7 +28,9 @@ public class DailyDetailViewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initIDs();
-        fillDetailTable(DailyFragment.HEADER_TO_SHOW, DailyFragment.DATA_TO_SHOW);
+        String[] header = { "Nutrient" , "Score" };
+        String[][] content = ScoreCalculator.getDayDetailTable(System.currentTimeMillis());
+        fillDetailTable(header, content);
     }
 
     private void initIDs() {
@@ -39,9 +42,9 @@ public class DailyDetailViewFragment extends Fragment {
         TableView<String[]> tv = (TableView<String[]>) getView().findViewById(R.id.mealDetailTable);
         SimpleTableDataAdapter sa = new SimpleTableDataAdapter(getContext(), data);
         SimpleTableHeaderAdapter ha = new SimpleTableHeaderAdapter(getContext(), header);
-        ha.setTextColor(Color.RED);
+        ha.setTextColor(Color.LTGRAY);
         ha.setTextSize(20);
-        sa.setTextColor(Color.RED);
+        sa.setTextColor(Color.LTGRAY);
         sa.setTextSize(15);
         tv.setColumnCount(header.length);
         tv.setHeaderAdapter(ha);

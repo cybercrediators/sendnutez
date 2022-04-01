@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ import kotlin.coroutines.EmptyCoroutineContext;
 import send.nutez.model.Ingredient;
 import send.nutez.model.IngredientNuteValue;
 import send.nutez.model.Meal;
+import send.nutez.model.Person;
 import send.nutez.utils.DataGetterThingy;
 import send.nutez.utils.NuteDatabaseUtils;
 import send.nutez.utils.PermissionHandler;
@@ -40,6 +43,7 @@ import send.nutez.Fragments.SlidingFragment;
 public class MainActivity extends AppCompatActivity {
     public static final String DEBUG_STRING = "LALALA";
     private static final int PAGES = 4;
+    public static Person person;
 
     private ViewPager2 viewPager;
     private FragmentStateAdapter pagerAdapter;
@@ -60,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
         //addWater(100);
         //test2();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        int weight = Integer.parseInt(sharedPreferences.getString("weight", "75"));
+        int age_months = Integer.parseInt(sharedPreferences.getString("months", "10"));
+        int age_years = Integer.parseInt(sharedPreferences.getString("years", "20"));
+        int age = age_years * 12 + age_months;
+        Log.e("AGE", age + "");
+        boolean gender = sharedPreferences.getBoolean("gender", false);
+        person = new Person(age, Person.FITNESS_LEVEL.MEDIUM, weight, gender);
     }
 
 

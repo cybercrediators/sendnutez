@@ -29,11 +29,12 @@ import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import send.nutez.DataAdapters.TableHelper;
 import send.nutez.R;
+import send.nutez.utils.StorageDatabaseUtils;
 
 public class HistoryDetailFragment extends Fragment {
 
     private TableView<String[]> tv;
-    private final static Date START_DATE = new Date(1646089200000l);
+    private Date START_DATE = new Date(1646089200000l);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -43,6 +44,8 @@ public class HistoryDetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         tv = (TableView<String[]>) getView().findViewById(R.id.historyTable);
+
+        START_DATE = StorageDatabaseUtils.getStartDate();
 
         // get Days between app creation
         Date curDay = new Date(System.currentTimeMillis());

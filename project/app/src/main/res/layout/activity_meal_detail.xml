@@ -13,34 +13,44 @@
         android:layout_height="79dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mealDetailTable"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/mealDetailTitle"
         android:layout_width="263dp"
         android:layout_height="33dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:text="Meal Details"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/mealDetailTable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.codecrafters.tableview.TableView
         android:id="@+id/mealDetailTable"
-        android:layout_width="360dp"
-        android:layout_height="580dp"
-        android:layout_marginBottom="140dp"
+        android:layout_width="370dp"
+        android:layout_height="316dp"
+        android:layout_marginBottom="416dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailDailyTitle"
+        app:tableView_columnCount="20"
+        app:tableView_headerColor="@color/recovery_colorPrimaryDark">
+    </de.codecrafters.tableview.TableView>
+
+    <de.codecrafters.tableview.TableView
+        android:id="@+id/ingredientsDetailTable"
+        android:layout_width="373dp"
+        android:layout_height="312dp"
+        android:layout_marginBottom="92dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mealDetailTable"
         app:tableView_columnCount="20"
         app:tableView_headerColor="@color/recovery_colorPrimaryDark">
 

@@ -15,6 +15,7 @@ import send.nutez.Fragments.DailyFragment;
 import send.nutez.MainActivity;
 import send.nutez.R;
 import send.nutez.model.Meal;
+import send.nutez.utils.ScoreCalculator;
 import send.nutez.utils.StorageDatabaseUtils;
 
 public class MealDetailActivity extends AppCompatActivity {
@@ -31,13 +32,19 @@ public class MealDetailActivity extends AppCompatActivity {
             String mealID = extras.getString("MEAL_ID");
             Long id = Long.parseLong(mealID);
             Meal m = StorageDatabaseUtils.getMealByID(id);
-            String[] mealHeader = { "Ingredients" };
+            String[] mealHeader = { "Ingredients", "Information" };
             String[][] mealContent = TableHelper.singleMealToTable(m);
+
+            String[] detailHeader = { "Nutrient", "Score" };
+            String[][] detailContent = ScoreCalculator.getMealDetailTable(m);
             //The key argument here must match that used in the other activity
             mealDetailHeader = m.getName();
             TextView tv = findViewById(R.id.mealDetailTitle);
             tv.setText(mealDetailHeader);
-            fillDetailTable(mealHeader, mealContent);
+            TableView<String[]> md = (TableView<String[]>) findViewById(R.id.mealDetailTable);
+            TableView<String[]> ingDet = (TableView<String[]>) findViewById(R.id.ingredientsDetailTable);
+            fillDetailTable(mealHeader, mealContent, ingDet);
+            fillDetailTable(detailHeader, detailContent, md);
         }
     }
 
@@ -47,8 +54,7 @@ public class MealDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void fillDetailTable(String[] header, String[][] data) {
-        TableView<String[]> tv = (TableView<String[]>) findViewById(R.id.mealDetailTable);
+    public void fillDetailTable(String[] header, String[][] data, TableView<String[]> tv) {
         SimpleTableDataAdapter sa = new SimpleTableDataAdapter(this, data);
         SimpleTableHeaderAdapter ha = new SimpleTableHeaderAdapter(this, header);
         ha.setTextColor(Color.LTGRAY);

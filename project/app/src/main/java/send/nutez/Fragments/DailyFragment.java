@@ -1,6 +1,7 @@
 package send.nutez.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.codecrafters.tableview.TableView;
@@ -27,6 +30,8 @@ import send.nutez.DataAdapters.TableHelper;
 import send.nutez.MainActivity;
 import send.nutez.R;
 import send.nutez.model.Meal;
+import send.nutez.model.Person;
+import send.nutez.utils.ScoreCalculator;
 import send.nutez.utils.StorageDatabaseUtils;
 
 public class DailyFragment extends Fragment {
@@ -109,6 +114,11 @@ public class DailyFragment extends Fragment {
         List<Meal> meals = StorageDatabaseUtils.getMealsForDay(year, month, date);
         String[] mealHeader = { mealHeaderString, "ID" };
         String[][] mealData = TableHelper.mealsToTable(meals);
+
+        Calendar cal = new GregorianCalendar(year, month, date);
+
+        foodScore = ScoreCalculator.getFoodPercentage(cal.getTimeInMillis());
+        waterAmount = ScoreCalculator.getWaterPercentage(cal.getTimeInMillis());
 
         foodText.setText(foodScore + "%");
         waterText.setText(waterAmount + "%");

@@ -9,16 +9,20 @@
             app:key="water_amount"
             app:title="Set Water Intake"/>
 
+        <SwitchPreferenceCompat
+            app:key="gender"
+            app:title="Do you identify as female?"/>
+
         <EditTextPreference
             app:key="weight"
             app:title="Set weight (kg)"/>
 
         <EditTextPreference
-            app:key="age_months"
+            app:key="months"
             app:title="Set age (months)"/>
 
         <EditTextPreference
-            app:key="age_years"
+            app:key="years"
             app:title="Set age (years)"/>
 
     </PreferenceCategory>

@@ -1,9 +1,14 @@
 package send.nutez.utils;
 
+import android.content.SharedPreferences;
+
+import androidx.preference.PreferenceManager;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import send.nutez.MainActivity;
 import send.nutez.model.Meal;
 import send.nutez.model.Nute;
 import send.nutez.model.NuteReferenceValue;
@@ -13,7 +18,7 @@ import send.nutez.model.Unit;
 
 public class ScoreCalculator {
     private static Person getPerson() {
-        return new Person();
+        return MainActivity.person;
     }
 
     public static String[][] getDayDetailTable(long dayMillis) {
