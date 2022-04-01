@@ -35,14 +35,15 @@
         android:id="@+id/saveMealButton"
         android:layout_width="175dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/teal_700"
         android:text="Save"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="0.974" />
 
     <Button
         android:id="@+id/discardMealButton"
@@ -54,8 +55,10 @@
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/searchFoodButton"
@@ -64,37 +67,36 @@
         android:drawableLeft="@drawable/ic_baseline_search_24"
         android:text="Search"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintBottom_toTopOf="@+id/saveMealButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886" />
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toEndOf="@+id/searchFoodField"
+        app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
+        app:layout_constraintVertical_bias="0.978" />
 
     <EditText
         android:id="@+id/searchFoodField"
         android:layout_width="213dp"
         android:layout_height="44dp"
-        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Search for Food..."
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintBottom_toTopOf="@+id/discardMealButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
-        app:layout_constraintVertical_bias="0.708" />
+        app:layout_constraintVertical_bias="0.978" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="362dp"
         android:layout_height="522dp"
-        app:layout_constraintBottom_toTopOf="@+id/saveMealButton"
+        app:layout_constraintBottom_toTopOf="@+id/discardMealButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detectedFoodString2"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.122" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
