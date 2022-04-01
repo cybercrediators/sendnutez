@@ -33,7 +33,7 @@ import send.nutez.R;
 public class HistoryDetailFragment extends Fragment {
 
     private TableView<String[]> tv;
-    private final static Date START_DATE = new Date(1640991600000l);
+    private final static Date START_DATE = new Date(1646089200000l);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -63,7 +63,7 @@ public class HistoryDetailFragment extends Fragment {
             String dayString = "";
             if (clickedDay.length > 0)
                 dayString = clickedDay[0].toString();
-            Toast.makeText(getContext(), dayString, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), dayString, Toast.LENGTH_SHORT).show();
             DailyFragment f = new DailyFragment();
             f.dateSTR = dayString;
             List<String> date = new ArrayList<String>(Arrays.asList(dayString.split("-")));
