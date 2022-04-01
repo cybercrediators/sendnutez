@@ -64,6 +64,7 @@ public class DataGetterThingy {
 
             IngredientNuteValue ingredientNuteValue = new IngredientNuteValue();
             ingredientNuteValue.setNute(StorageDatabaseUtils.getNuteByName(Nutrient.WATER.getName()));
+            ingredientNuteValue.setUnit("ml");
             ingredientNuteValue.setNute_id(ingredientNuteValue.getNute().id);
             ingredientNuteValue.setValue(amount);
 

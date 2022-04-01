@@ -20,6 +20,7 @@ import send.nutez.model.Ingredient;
 import send.nutez.model.IngredientNuteValue;
 import send.nutez.model.Nute;
 import send.nutez.model.Nutrient;
+import send.nutez.model.Unit;
 import send.nutez.utils.StorageDatabaseUtils;
 
 public class AmilandNutritionApiConnector implements NutritionApiConnector {
@@ -53,7 +54,7 @@ public class AmilandNutritionApiConnector implements NutritionApiConnector {
 
             if(o.has("foods")) {
                 JSONArray foods = o.getJSONArray("foods");
-                //Log.d(DEBUG_STRING, foods.toString(2));
+                Log.d(DEBUG_STRING, foods.toString(2));
                 for(int i = 0; i < 1; i++) {
                     if(foods.getJSONObject(i).has("foodNutrients")) {
                         JSONArray nutrients = foods.getJSONObject(i).getJSONArray("foodNutrients");
@@ -63,6 +64,11 @@ public class AmilandNutritionApiConnector implements NutritionApiConnector {
                                 Nute n = StorageDatabaseUtils.getNuteByName(nameMap.get(nutrientName));
                                 IngredientNuteValue ingredientNuteValue = new IngredientNuteValue();
                                 ingredientNuteValue.setNute_id(n.id);
+
+                                ingredientNuteValue.setUnit(nutrients.getJSONObject(j).getString("unitName"));
+                                if(nutrientName.equals("Water")) {
+                                    ingredientNuteValue.setUnit("ml");
+                                }
                                 ingredientNuteValue.setValue(nutrients.getJSONObject(j).getDouble("value"));
                                 ingreed.addIngredientNuteValue(ingredientNuteValue);
                                 ingreed.setInformations("https://fdc.nal.usda.gov/fdc-app.html#/food-details/" + foods.getJSONObject(i).getInt("fdcId") + "/");

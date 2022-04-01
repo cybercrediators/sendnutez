@@ -4,6 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import static send.nutez.MainActivity.DEBUG_STRING;
+
+import android.util.Log;
+
+import java.util.Locale;
+
 import send.nutez.utils.DataGetterThingy;
 
 /**
@@ -19,5 +25,7 @@ public class ExampleUnitTest {
 
     @Test
     public void test() {
+        System.out.println("µg".toUpperCase(Locale.ROOT));
+        System.out.println("mg".toUpperCase(Locale.ROOT));
     }
 }

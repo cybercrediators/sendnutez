@@ -110,6 +110,13 @@ public class StorageDatabaseUtils {
         return getMealsBetween(new Date(start.getTimeInMillis()), new Date(end.getTimeInMillis()));
     }
 
+    public static Date getStartDate() {
+        if(getAllMeals().size() > 0) {
+            return getAllMeals().get(0).getCreationDate();
+        }
+        return new Date(System.currentTimeMillis());
+    }
+
     public static List<Meal> getMealsBetween(Date start, Date end) {
         try {
             return daoSession.getMealDao().queryBuilder().where(MealDao.Properties.CreationDate.between(start.getTime(), end.getTime())).list();

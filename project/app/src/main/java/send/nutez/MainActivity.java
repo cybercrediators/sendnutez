@@ -141,7 +141,18 @@ public class MainActivity extends AppCompatActivity {
 
 
                     double val = ScoreCalculator.getFoodPercentage(System.currentTimeMillis());
+                    double wal = ScoreCalculator.getWaterPercentage(System.currentTimeMillis());
                     Log.d(DEBUG_STRING, "percentage" + String.valueOf(val));
+                    Log.d(DEBUG_STRING, "percentage" + String.valueOf(wal));
+                    String[][] str = ScoreCalculator.getDayDetailTable(System.currentTimeMillis());
+                    String[][] str2 = ScoreCalculator.getMealDetailTable(meal);
+
+                    for(int i = 0; i < str.length; i++) {
+                        Log.d(DEBUG_STRING, str[i][0] + " " + str[i][1]);
+                    }
+                    for(int i = 0; i < str2.length; i++) {
+                        Log.d(DEBUG_STRING, str[i][0] + " " + str[i][1]);
+                    }
                 }
             }
         });

@@ -19,6 +19,7 @@ public class IngredientNuteValue {
 
     private long ingredient_id;
     private double value;
+    private String unit;
 
     public IngredientNuteValue(Nute nute, float value) {
         this.nute = nute;
@@ -32,12 +33,13 @@ public class IngredientNuteValue {
     /** Used for active entity operations. */
     @Generated(hash = 1558698494)
     private transient IngredientNuteValueDao myDao;
-    @Generated(hash = 308095262)
-    public IngredientNuteValue(Long id, long nute_id, long ingredient_id, double value) {
+    @Generated(hash = 1563121791)
+    public IngredientNuteValue(Long id, long nute_id, long ingredient_id, double value, String unit) {
         this.id = id;
         this.nute_id = nute_id;
         this.ingredient_id = ingredient_id;
         this.value = value;
+        this.unit = unit;
     }
     @Generated(hash = 1243942191)
     public IngredientNuteValue() {
@@ -131,6 +133,12 @@ public class IngredientNuteValue {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+    public String getUnit() {
+        return this.unit;
+    }
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1473903398)

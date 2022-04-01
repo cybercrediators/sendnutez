@@ -1,5 +1,7 @@
 package send.nutez.model;
 
+import android.util.Log;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
@@ -11,6 +13,7 @@ import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
+import send.nutez.MainActivity;
 import send.nutez.utils.StorageDatabaseUtils;
 
 @Entity
@@ -35,14 +38,20 @@ public class Meal {
         this.creationDate = new Date(System.currentTimeMillis());
     }
 
-
     public double getTotalNutrientValue(Nute n) {
         double d = 0.0;
         if(getIngredients() != null) {
             for (Ingredient ingredient : getIngredients()) {
                 for (IngredientNuteValue val : ingredient.getNutrients()) {
                     if (val.getNute_id() == n.id) {
-                        d += val.getValue() * ingredient.getQuantity() / 100.0; //referece value for 100g
+                        String unit1 = n.getUnit();
+                        String unit2 = val.getUnit();
+                        Unit u1 = Unit.getUnit(unit1);
+                        Unit u2 = Unit.getUnit(unit2);
+                        if(u2 == null)
+                            u2 = u1;
+                        double con = u2.convert(u1, val.getValue());
+                        d += con * ingredient.getQuantity() / 100.0; //referece value for 100g
                         break;
                     }
                 }
