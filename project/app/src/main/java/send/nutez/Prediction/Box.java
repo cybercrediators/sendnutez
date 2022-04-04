@@ -5,6 +5,10 @@ import android.graphics.RectF;
 
 import java.util.Random;
 
+/**
+ * define a box for retrieving reults from the
+ * prediction (coordinates, score, label)
+ */
 public class Box {
     public float x0,y0,x1,y1;
     private int label;

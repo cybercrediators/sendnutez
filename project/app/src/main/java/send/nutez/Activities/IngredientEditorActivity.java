@@ -31,6 +31,10 @@ import send.nutez.R;
 import send.nutez.model.Meal;
 import send.nutez.utils.DataGetterThingy;
 
+/**
+ * define the activity for detailed edits for
+ * newly added meals
+ */
 public class IngredientEditorActivity extends AppCompatActivity {
 
     private String filepath;
@@ -49,6 +53,11 @@ public class IngredientEditorActivity extends AppCompatActivity {
     //private ArrayAdapter<String> adapter;
     private IngredientAdapter adapter;
 
+    /**
+     * create the view and retrieve the image path incl. predictions
+     * from the previous activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +74,20 @@ public class IngredientEditorActivity extends AppCompatActivity {
         initListeners();
     }
 
+    /**
+     * initilize the ui listeners for views
+     */
     private void initListeners() {
         searchButton.setOnClickListener(addFoodButton);
         saveButton.setOnClickListener(saveMealButton);
         discardButton.setOnClickListener(discardListener);
     }
 
+    /**
+     * set the ids for the views from the layout
+     * create an ingredient adapter for a dynamic list view
+     * with edittext boxes for food amounts
+     */
     private void initIDs() {
         searchButton = findViewById(R.id.searchFoodButton);
         namefield = findViewById(R.id.mealNamefield);
@@ -94,6 +111,9 @@ public class IngredientEditorActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    /**
+     * back button to stop the current activity and go back
+     */
     View.OnClickListener discardListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -101,6 +121,10 @@ public class IngredientEditorActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Yes/No dialog in case you want to add food
+     * by yourself
+     */
     View.OnClickListener addFoodButton = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -110,6 +134,9 @@ public class IngredientEditorActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * save the edited and final meal to the database
+     */
     View.OnClickListener saveMealButton = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -121,6 +148,11 @@ public class IngredientEditorActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * add the currently edited meal to the database
+     * by retrieving information from the nutrition database
+     * @param mealName
+     */
     private void addMealToDatabase(String mealName) {
         Map<String, Float> recipe = new HashMap<>();
         for (int i=0;i<adapter.getCount();i++){
@@ -147,11 +179,18 @@ public class IngredientEditorActivity extends AppCompatActivity {
         }, mealName);
     }
 
+    /**
+     * start the main activity
+     */
     private void switchBackToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * add an element to the ingredient adapter
+     * in the dynamic ingredient list view
+     */
     private void addElementToScrollView() {
         String value = searchFoodField.getText().toString();
         if (value.isEmpty())
@@ -163,8 +202,10 @@ public class IngredientEditorActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    // Ask if you want to add the found food
-    // YES/NO dialog
+    /**
+     * Ask if you want to add the found food
+     * YES/NO dialog
+    */
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {

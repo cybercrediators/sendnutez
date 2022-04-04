@@ -14,6 +14,9 @@ import android.provider.MediaStore;
 
 import java.io.IOException;
 
+/**
+ * Helper functions for the predictions
+ */
 public class PredictionHelper {
 
     public int readPictureDegree(String path) {
@@ -56,40 +59,5 @@ public class PredictionHelper {
             bm.recycle();
         }
         return returnBm;
-    }
-
-    /**
-     * letterbox (slow)
-     *
-     * @param srcBitmap
-     * @param srcWidth
-     * @param srcHeight
-     * @param dstWidth
-     * @param dstHeight
-     * @param matrix
-     * @return
-     */
-    public static Bitmap letterbox(Bitmap srcBitmap, int srcWidth, int srcHeight, int dstWidth, int dstHeight, Matrix matrix) {
-        long timeStart = System.currentTimeMillis();
-        float scale = Math.min((float) dstWidth / srcWidth, (float) dstHeight / srcHeight);
-        int nw = (int) (srcWidth * scale);
-        int nh = (int) (srcHeight * scale);
-        matrix.postScale((float) nw / srcWidth, (float) nh / srcHeight);
-        Bitmap bitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcWidth, srcHeight, matrix, false);
-        Bitmap newBitmap = Bitmap.createBitmap(dstWidth, dstHeight, Bitmap.Config.ARGB_8888);//创建和目标相同大小的空Bitmap
-        Canvas canvas = new Canvas(newBitmap);
-        Paint paint = new Paint();
-        // 针对绘制bitmap添加抗锯齿
-        PaintFlagsDrawFilter pfd = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
-        paint.setFilterBitmap(false);  // 对Bitmap进行滤波处理
-        paint.setAntiAlias(true);  // 设置抗锯齿
-        canvas.setDrawFilter(pfd);
-        canvas.drawBitmap(bitmap, null,
-                new Rect((dstHeight - nh) / 2, (dstWidth - nw) / 2,
-                        (dstHeight - nh) / 2 + nh, (dstWidth - nw) / 2 + nw),
-                paint);
-        long timeDur = System.currentTimeMillis() - timeStart;
-//        Log.d(TAG, "letterbox time:" + timeDur);
-        return newBitmap;
     }
 }

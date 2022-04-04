@@ -22,6 +22,11 @@ misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
+# cpp
+./project/app/.cxx
+./project/app/build
+./.ccls-cache
+
 # Keystore files
 *.jks
 *.keystore

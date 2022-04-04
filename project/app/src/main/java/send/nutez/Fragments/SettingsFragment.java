@@ -14,7 +14,17 @@ import androidx.preference.PreferenceFragmentCompat;
 import send.nutez.R;
 import send.nutez.model.Person;
 
+/**
+ * create a fragment for android preference settings
+ */
 public class SettingsFragment extends PreferenceFragmentCompat {
+    /**
+     * retrieve settings from the settings.xml
+     * and add custom display strings to show the currently
+     * set value
+     * @param savedInstanceState
+     * @param rootKey
+     */
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);

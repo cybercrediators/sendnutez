@@ -3,6 +3,9 @@ package send.nutez.Prediction;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 
+/**
+ * yolo connector class via jni to ncnn
+ */
 public class YOLOv5 {
     static {
         System.loadLibrary("yolov5");

@@ -31,6 +31,10 @@ import java.util.List;
 import send.nutez.Prediction.Predictor;
 import send.nutez.R;
 
+/**
+ * Activity for confirming the net prediction with
+ * an image preview.
+ */
 public class PredictionEdit extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
 
@@ -49,6 +53,10 @@ public class PredictionEdit extends AppCompatActivity {
     private int width;
     private int height;
 
+    /**
+     * Create the window and initialize listeners
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +73,9 @@ public class PredictionEdit extends AppCompatActivity {
         initListeners();
     }
 
+    /**
+     * get/set prediction edit activity view ids
+     */
     private void initID() {
         predictionText = findViewById(R.id.predictionText);
         selectImageButton = findViewById(R.id.selectImageButton);
@@ -73,6 +84,13 @@ public class PredictionEdit extends AppCompatActivity {
         continueButton = findViewById(R.id.continueButton);
     }
 
+    /**
+     * Listen for activity results, in this case the image picker (PICK_IMAGE)
+     * and set the preview image path
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -87,6 +105,11 @@ public class PredictionEdit extends AppCompatActivity {
         }
     }
 
+    /**
+     * convert an image picker Uri to a full path string
+     * @param contentUri
+     * @return
+     */
     private String getPathFromURI(Uri contentUri) {
         String res = null;
         String[] proj = { MediaStore.Images.Media.DATA };
@@ -100,6 +123,9 @@ public class PredictionEdit extends AppCompatActivity {
         return res;
     }
 
+    /**
+     * start an image picker activity
+     */
     private void selectImageFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -107,6 +133,10 @@ public class PredictionEdit extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE);
     }
 
+    /**
+     * listen for the continue button click and start
+     * the detail editor activity.
+     */
     View.OnClickListener continueSelection = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -118,6 +148,9 @@ public class PredictionEdit extends AppCompatActivity {
         }
     };
 
+    /**
+     * define the discard button listener to end the activity and go back
+     */
     View.OnClickListener discardSelection = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -125,6 +158,9 @@ public class PredictionEdit extends AppCompatActivity {
         }
     };
 
+    /**
+     * listen for the image picker button
+     */
     View.OnClickListener selectPictureListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -132,6 +168,10 @@ public class PredictionEdit extends AppCompatActivity {
         }
     };
 
+    /**
+     * initialize button listeners from this activity
+     * and start the image prediction on the chosen image
+     */
     private void initListeners() {
         // Choose image if you picked select image in the camera fragment
         // filepath = "file:///storage/emulated/0/Pictures/1648651002271.jpg";
@@ -150,6 +190,11 @@ public class PredictionEdit extends AppCompatActivity {
         }
     }
 
+    /**
+     * Predict the image contents from the given file Uri
+     * and draw the bounding boxes
+     * @param filepath
+     */
     public void checkPicture(Uri filepath) {
         String[] REQ_PERMISSIONS = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE };
         final Bitmap image = predictor.getPicture(filepath, getContentResolver());

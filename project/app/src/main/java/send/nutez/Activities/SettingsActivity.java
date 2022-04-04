@@ -11,6 +11,9 @@ import send.nutez.MainActivity;
 import send.nutez.R;
 import send.nutez.model.Person;
 
+/**
+ * Activity, container for the settings fragment
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     @Override
@@ -24,6 +27,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * override the back button to update personal settings at the home screen
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

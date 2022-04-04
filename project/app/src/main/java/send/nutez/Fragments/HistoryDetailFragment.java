@@ -31,6 +31,9 @@ import send.nutez.DataAdapters.TableHelper;
 import send.nutez.R;
 import send.nutez.utils.StorageDatabaseUtils;
 
+/**
+ * create a detailed history fragment to show past dates
+ */
 public class HistoryDetailFragment extends Fragment {
 
     private TableView<String[]> tv;
@@ -41,6 +44,11 @@ public class HistoryDetailFragment extends Fragment {
         return (ViewGroup) inflater.inflate(R.layout.history_detail_layout, container, false);
     }
 
+    /**
+     * fill the date table with the past dates
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         tv = (TableView<String[]>) getView().findViewById(R.id.historyTable);
@@ -60,6 +68,10 @@ public class HistoryDetailFragment extends Fragment {
         tv.addDataClickListener(new HistoryClickListener());
     }
 
+    /**
+     * listener for clicks on the table to
+     * switch to a daily overview for the clicked date
+     */
     private class HistoryClickListener implements TableDataClickListener<String[]> {
         @Override
         public void onDataClicked(int rowindex, String[] clickedDay) {
@@ -84,6 +96,12 @@ public class HistoryDetailFragment extends Fragment {
         }
     }
 
+    /**
+     * get a list of dates between to given dates
+     * @param startdate
+     * @param enddate
+     * @return
+     */
     public static List<Date> getDaysBetweenDates(Date startdate, Date enddate)
     {
         List<Date> dates = new ArrayList<Date>();
@@ -99,18 +117,11 @@ public class HistoryDetailFragment extends Fragment {
         return dates;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static List<LocalDate> getDatesBetweenUsingJava8(
-            LocalDate startDate, LocalDate endDate) {
-
-        long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        return IntStream.iterate(0, i -> i + 1)
-                .limit(numOfDaysBetween)
-                .mapToObj(i -> startDate.plusDays(i))
-                .collect(Collectors.toList());
-    }
-
+    /**
+     * fill the ui table with the given simple string matrices
+     * @param header
+     * @param data
+     */
     public void fillHistoryDetails(String[] header, String[][] data) {
         SimpleTableDataAdapter sa = new SimpleTableDataAdapter(getContext(), data);
         SimpleTableHeaderAdapter ha = new SimpleTableHeaderAdapter(getContext(), header);

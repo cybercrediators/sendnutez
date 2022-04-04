@@ -25,6 +25,9 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * helper class to retrieve predictions from the ncnn yolo predictor
+ */
 public class Predictor {
 
     public List<String> getPredictions() {
@@ -36,10 +39,20 @@ public class Predictor {
         lastPredictedClassed = new HashMap<String, List<Float>>();
     }
 
+    /**
+     * return the last predicted classes
+     * @return
+     */
     public HashMap<String, List<Float>> getLastPredictedClasses() {
         return lastPredictedClassed;
     }
 
+    /**
+     * return the bitmap of a selected image Uri
+     * @param selectedImage
+     * @param contentResolver
+     * @return
+     */
     public Bitmap getPicture(Uri selectedImage, ContentResolver contentResolver) {
         //String[] filePathColumn = {MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString()};
         //Cursor cursor = contentResolver.query(selectedImage, null, null, null,null);
@@ -61,6 +74,11 @@ public class Predictor {
         return rotateBitmapByDegree(bitmap, rotate);
     }
 
+    /**
+     * read the given pictures degree
+     * @param path
+     * @return
+     */
     public int readPictureDegree(String path) {
         int degree = 0;
         try {
@@ -83,6 +101,12 @@ public class Predictor {
         return degree;
     }
 
+    /**
+     * rotate a given bitmap by a given degree
+     * @param bm
+     * @param degree
+     * @return
+     */
     public Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
         Bitmap returnBm = null;
         Matrix matrix = new Matrix();
@@ -102,6 +126,9 @@ public class Predictor {
         return returnBm;
     }
 
+    /**
+     * draw the box coordinates on a given bitmap
+     */
     protected Bitmap drawBoxRects(Bitmap mutableBitmap, Box[] results) {
         if (results == null || results.length <= 0) {
             return mutableBitmap;
@@ -122,6 +149,15 @@ public class Predictor {
         return mutableBitmap;
     }
 
+    /**
+     * detect food on a given bitmap with the given
+     * score and non-max-suppression threshold
+     * and draw the rectangles onto the bitmap itself
+     * @param img
+     * @param threshold
+     * @param nms_threshold
+     * @return
+     */
     public Bitmap detectFromImage(Bitmap img, double threshold, double nms_threshold) {
         Bitmap mutableBitmap = null;
         float[] enetMasks = null;
@@ -146,6 +182,13 @@ public class Predictor {
         return mutableBitmap;
     }
 
+    /**
+     * return a list of predicted classes, boxes and scores for a given bitmap
+     * @param img
+     * @param threshold
+     * @param nms_threshold
+     * @return
+     */
     public Box[] getResults(Bitmap img, double threshold, double nms_threshold) {
         Box[] result = YOLOv5.detect(img, threshold, nms_threshold);
         //Log.e("SIZEOFCLASSES1", "" + lastPredictedClassed.toString());

@@ -12,6 +12,9 @@ import com.zxy.recovery.core.Recovery;
 import send.nutez.AppCrashHandler;
 import send.nutez.MainActivity;
 
+/**
+ * Ncnn helper class
+ */
 public class Ncnn extends Application {
 
     @Override

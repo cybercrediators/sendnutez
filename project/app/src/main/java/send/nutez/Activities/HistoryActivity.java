@@ -8,6 +8,9 @@ import android.os.Bundle;
 import send.nutez.Fragments.HistoryDetailFragment;
 import send.nutez.R;
 
+/**
+ * Activity, container for the nutrition history
+ */
 public class HistoryActivity extends AppCompatActivity {
 
     @Override

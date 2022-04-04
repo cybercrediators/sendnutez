@@ -49,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private FragmentStateAdapter pagerAdapter;
 
+    /**
+     * initialize viewpager for the main menu
+     * slider fragments
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * overwrite the backbutton
+     * to jump back to the previews viewpager slide
+     */
     @Override
     public void onBackPressed() {
         if (viewPager.getCurrentItem() == 1) {
@@ -81,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * define a slider page adapter to manage selected fragments
+     */
     private class SliderPageAdapter extends FragmentStateAdapter {
         public SliderPageAdapter(FragmentActivity fa) {
             super(fa);
@@ -165,6 +177,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * add water to the database
+     * @param amount
+     */
     public static void addWater(int amount) {
         DataGetterThingy.addWater(100, new Continuation<Boolean>() {
             @NonNull
@@ -185,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * update the personal stats
+     * @param context
+     */
     public static void updatePerson(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         int weight = Integer.parseInt(sharedPreferences.getString("weight", "75"));

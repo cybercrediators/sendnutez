@@ -18,10 +18,20 @@ import send.nutez.model.Meal;
 import send.nutez.utils.ScoreCalculator;
 import send.nutez.utils.StorageDatabaseUtils;
 
+/**
+ * define the activity to display details
+ * for one specific meal
+ */
 public class MealDetailActivity extends AppCompatActivity {
 
     public String mealDetailHeader = "Meal Details";
 
+    /**
+     * create the view and get the data based on the
+     * given meal id from the database and insert
+     * them into the ui tables.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +58,23 @@ public class MealDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * overwrite the backbutton to avoid back button hell
+     * TODO: Bug
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Create and fill a given UI table with simple strings
+     * TODO: Write a correct Meal table adapter
+     * @param header
+     * @param data
+     * @param tv
+     */
     public void fillDetailTable(String[] header, String[][] data, TableView<String[]> tv) {
         SimpleTableDataAdapter sa = new SimpleTableDataAdapter(this, data);
         SimpleTableHeaderAdapter ha = new SimpleTableHeaderAdapter(this, header);

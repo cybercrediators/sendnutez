@@ -18,12 +18,21 @@ import java.util.Locale;
 import send.nutez.Prediction.Box;
 import send.nutez.Prediction.Predictor;
 
+/**
+ * create a rectangle overlay view
+ * for the predicted bounding boxes
+ */
 public class RectOverlay extends View {
 
     private Paint boxPaint;
     private List<Box> rects;
     private int width;
 
+    /**
+     * overlay view constructor
+     * @param context
+     * @param attrs
+     */
     public RectOverlay(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         rects = new ArrayList<Box>();
@@ -32,6 +41,10 @@ public class RectOverlay extends View {
         boxPaint.setStyle(Paint.Style.STROKE);
     }
 
+    /**
+     * draw the rectangles on the given canvas
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -48,6 +61,11 @@ public class RectOverlay extends View {
         }
     }
 
+    /**
+     * add the box rectangles to the canvas
+     * @param results
+     * @param width
+     */
     public void drawBoxRects(Box[] results, int width) {
         if (results == null)
             return;

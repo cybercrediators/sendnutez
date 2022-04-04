@@ -8,8 +8,16 @@ import java.util.List;
 import send.nutez.model.Ingredient;
 import send.nutez.model.Meal;
 
+/**
+ * static functions to generate simple string table data
+ */
 public class TableHelper {
 
+    /**
+     * turn a list of meals into a simple String matrix
+     * @param meals
+     * @return
+     */
     public static String[][] mealsToTable(List<Meal> meals) {
         String[][] strMeals = new String[meals.size()][2];
         for (int i = 0; i < meals.size(); i++) {
@@ -19,6 +27,11 @@ public class TableHelper {
         return strMeals;
     }
 
+    /**
+     * turn a single meal into a simple string matrix
+     * @param m
+     * @return
+     */
     public static String[][] singleMealToTable(Meal m) {
         List<Ingredient> is = m.getIngredients();
         String[][] strMeal = new String[is.size()][2];
@@ -29,6 +42,11 @@ public class TableHelper {
         return strMeal;
     }
 
+    /**
+     * turn a list of dates into a simple string matrix
+     * @param dates
+     * @return
+     */
     public static String[][] datesToTable(List<Date> dates) {
         String[][] strDates = new String[dates.size()][1];
         for (int i = 0; i < dates.size(); i++) {

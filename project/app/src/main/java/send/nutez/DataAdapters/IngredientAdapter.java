@@ -17,10 +17,18 @@ import java.util.HashMap;
 
 import send.nutez.R;
 
+/**
+ * create an Adapter for the dynamic ingredient list
+ */
 public class IngredientAdapter extends BaseAdapter {
     Context context;
     ArrayList<HashMap<String, String>> data;
 
+    /**
+     * Adapter constructor
+     * @param context
+     * @param data
+     */
     public IngredientAdapter(Context context, ArrayList<HashMap<String, String>> data) {
         this.context = context;
         this.data = data;
@@ -76,6 +84,9 @@ public class IngredientAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * define adapter view elements
+     */
     class ViewHolder {
         EditText editPropertyValue;
         TextView propertyName;

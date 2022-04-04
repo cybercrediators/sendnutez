@@ -15,6 +15,9 @@ import send.nutez.Activities.PredictionEdit;
 import send.nutez.MainActivity;
 import send.nutez.R;
 
+/**
+ * create the fragment for the main menu slider with the water button
+ */
 public class SlidingFragment extends Fragment {
     private int waterAmount = 100;
 
@@ -41,6 +44,10 @@ public class SlidingFragment extends Fragment {
         waterButton.setText("+" + waterAmount + " (ml) Water");
     }
 
+    /**
+     * listen for the water button click and add the desired water amount
+     * to the database
+     */
     View.OnClickListener addWaterListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
