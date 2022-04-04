@@ -14,13 +14,13 @@ This app is the result of a one-week practical from the chair of [Embedded Intel
 + add food from the food database manually
 
 ## Screenshots
-<img src="./docs/pics/screenshot_1.png" alt="drawing" width="150"/>
-<img src="./docs/pics/screenshot_2.png" alt="drawing" width="150"/>
-<img src="./docs/pics/screenshot_3.png" alt="drawing" width="150"/>
-<img src="./docs/pics/screenshot_4.png" alt="drawing" width="150"/>
-<img src="./docs/pics/screenshot_5.png" alt="drawing" width="150"/>
-<img src="./docs/pics/screenshot_6.png" alt="drawing" width="150"/>
-<img src="./docs/pics/screenshot_7.png" alt="drawing" width="150"/>
+[<img src="./docs/pics/screenshot_1.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_1.png)
+[<img src="./docs/pics/screenshot_2.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_2.png)
+[<img src="./docs/pics/screenshot_3.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_3.png)
+[<img src="./docs/pics/screenshot_4.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_4.png)
+[<img src="./docs/pics/screenshot_5.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_5.png)
+[<img src="./docs/pics/screenshot_6.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_6.png)
+[<img src="./docs/pics/screenshot_7.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_7.png)
 
 ## Installation
 + Clone the repo and import it to Android Studio
