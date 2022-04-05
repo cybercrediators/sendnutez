@@ -21,6 +21,7 @@ This app is the result of a one-week practical from the chair of [Embedded Intel
 [<img src="./docs/pics/screenshot_5.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_5.png)
 [<img src="./docs/pics/screenshot_6.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_6.png)
 [<img src="./docs/pics/screenshot_7.png" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screenshot_7.png)
+[<img src="./docs/pics/screencast.gif" align="center" width="150" hspace="10" vspace="10">](./docs/pics/screencast.gif)
 
 ## Installation
 + Clone the repo and import it to Android Studio
