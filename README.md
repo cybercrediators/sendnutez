@@ -52,3 +52,6 @@ This app is the result of a one-week practical from the chair of [Embedded Intel
   + https://github.com/Tencent/ncnn
   + https://github.com/ultralytics/yolov5
 + https://arxiv.org/abs/1909.05994 -> real time food recognition implementation
+
+## Team
+Sebastian Rossi (@rossizero), Sebastian Lutz (@cybercrediators)
